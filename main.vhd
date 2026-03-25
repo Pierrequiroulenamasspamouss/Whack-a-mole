@@ -4,9 +4,13 @@ use ieee.std_logic_1164.all ; --Import the standart libraries
 entity Whackamole is --determine the inputs and outputs
   port
 	(-- Input ports
-    clk       : in  std_logic ;
-    button    : in  std_logic ;
-    -- Output ports
+	 slowclk	  : in  std_logic ;
+    fastclk   : in  std_logic ;
+    button    : in  std_logic_vector(8 downto 0); --vector of the buttons
+    addscore  : in  std_logic ;
+	 
+	 
+	 -- Output ports
 	 leds   : out std_logic_vector(8 downto 0) ) ; --vector of the leds
 end entity Whackamole ;
 
@@ -16,29 +20,19 @@ architecture Whackamole_arch of Whackamole is
   signal old_button_press : std_logic := '0' ;
 begin
 
-	main : process( clk )
-	begin
-		if( rising_edge( clk ) ) then
-			if (cnt = 8) then --reset cnt if to high
-				cnt <= 0 ;
-			else
-				cnt <= cnt + 1 ; --increment cnt
-			end if;
-			
-			if( button = '1' and old_button_press = '0') then
-				leds(current_value) <= '0' ;--deactivate previous led
-				leds(cnt) <= '1' ;-- activate new led
-				current_value <= cnt; --note the random value
-				old_button_press <= '1' ; --remeber that the button is pressed
-			end if;
-			
-			if(button = '0') then --if button not pressed remember that
-				old_button_press <= '0';
-			end if;
-			
-		end if; 
+  main : process(fastclk)
+  begin
+    if rising_edge(fastclk) then
 
-		
-	end process main ;
+      for i in 0 to 8 loop
+        if button(i) = '0' then -- bouton appuyé (pull-down inversé)
+          leds(i) <= '1';
+        else
+          leds(i) <= '0';
+        end if;
+      end loop;
 
-end architecture Whackamole_arch ;
+    end if;
+  end process main;
+
+end architecture Whackamole_arch;

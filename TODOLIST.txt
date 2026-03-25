@@ -3,10 +3,18 @@ Regarder les boutons input/output
 
 
 Goathier: 
-optimiser le random_led 
+    - optimiser le random_led 
 	- ecran de début jusqua avoir un input
-	- moles qui redescendent apres un certain temps
-	- plusieurs led en meme temps
-BONJOUR
+	- plusieurs led en meme temps (on verra ça à un moment)
 
-PIERRE
+Pierre: 
+    - Design du reste du circuit +prototype 
+    - Tester le prototype
+    - Nettoyage et fusion des deux codes. 
+    - Schematic du circuit
+
+Ilan(e)? 
+    - Gestion des timers
+    - Logique de score
+    - moles qui redescendent apres un certain temps
+	
