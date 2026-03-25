@@ -1,15 +1,12 @@
 Faire disparaitre les taupes aléatoirement
 Regarder les boutons input/output
 
-<<<<<<< HEAD
 
 Goathier: 
 optimiser le random_led 
 	- ecran de début jusqua avoir un input
 	- moles qui redescendent apres un certain temps
 	- plusieurs led en meme temps
-=======
 BONJOUR
 
 PIERRE
->>>>>>> 50a5fbcdef537353e0dcb19332a54eade6591d07
