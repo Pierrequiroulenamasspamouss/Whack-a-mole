@@ -1,16 +1,16 @@
 library ieee ;
 use ieee.std_logic_1164.all ; --Import the standart libraries
 
-entity random_led is --determine the inputs and outputs
+entity Whackamole is --determine the inputs and outputs
   port
 	(-- Input ports
     clk       : in  std_logic ;
     button    : in  std_logic ;
     -- Output ports
 	 leds   : out std_logic_vector(8 downto 0) ) ; --vector of the leds
-end entity random_led ;
+end entity Whackamole ;
 
-architecture random_led_arch of random_led is
+architecture Whackamole_arch of Whackamole is
   signal cnt       : integer range 0 to 8 := 0 ;
   signal current_value : integer range 0 to 8 := 0 ;
   signal old_button_press : std_logic := '0' ;
@@ -41,4 +41,4 @@ begin
 		
 	end process main ;
 
-end architecture random_led_arch ;
+end architecture Whackamole_arch ;
