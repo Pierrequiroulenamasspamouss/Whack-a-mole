@@ -1,2 +1,4 @@
 Faire disparaitre les taupes aléatoirement
 Regarder les boutons input/output
+
+BONJOUR
