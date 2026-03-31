@@ -14,7 +14,9 @@ entity Whackamole is --determine the inputs and outputs
     -- Output ports
 	 leds   : out std_logic_vector(8 downto 0); --vector of the leds
 	 score_high : out std_logic;
-	 score_low : out std_logic );
+	 score_low : out std_logic ;
+     score_X : out integer range 0 to 9;
+     score_X0 : out integer range 0 to 9 );
 end entity Whackamole ;
 
 
@@ -31,6 +33,9 @@ architecture Whackamole_arch of Whackamole is
   
   signal start_pressed : std_logic := '0';
   signal button_pressed : std_logic_vector(8 downto 0);
+
+  signal score_ones : integer range 0 to 9 := 0;
+  signal score_tens : integer range 0 to 9 := 0;
 begin
 
     main : process(clk)
@@ -50,7 +55,7 @@ begin
                 score_high <= '0';
             end if;
 				
-				if error_timer > 0 then
+			if error_timer > 0 then
                 score_low <= '1';
                 error_timer <= error_timer - 1;
             else
@@ -65,6 +70,14 @@ begin
                 
                 if button(current_mole) = '1' and button_pressed(current_mole) = '0' then
                     score_timer <= 80; --timer pour que le signal soit assez long pour être interpreter
+
+                    if (score_ones = 9) and (score_tens /= 9) then --score counter
+                        score_tens <= score_tens + 1;
+                        score_ones <= 0;
+                    else 
+                        score_ones <= score_ones + 1;
+                    end if;
+                    
                     mole_active <= '0';
                     spawn_delay <= 320; -- la mole n'apparaît pas directement après la suivante, 1s d'attente
 						  
@@ -74,16 +87,27 @@ begin
                     mole_duration <= mole_duration - 1;	  
                 else
                     mole_active <= '0';
+                    leds(current_mole) <= '0'; --pas oublier d'eteindre le led quand le temps passe
                     spawn_delay <= 320;
                 end if;
                 
                 for i in 0 to 8 loop
                     if i /= current_mole and button(i) = '1' and button_pressed(i) = '0' then
                         error_timer <= 80;  -- si le mauvais boutton est pressé alors envoie un signal
+
+                        If (score_ones = 0) and (score_tens = 0) then -- check for negative
+                            null;
+                        elsif (score_ones = 0) and (score_tens /= 0) then --score counter
+                            score_tens <= score_tens - 1 ;
+                            score_ones <= 9;
+                        else 
+                            score_ones <= score_ones - 1;
+                        end if;
+
                     end if;
                 end loop;
 
-            else                                                    -- au départ aucune mole sur le terrain
+            else   -- au départ aucune mole sur le terrain
 					
                 if spawn_delay > 0 then
                     spawn_delay <= spawn_delay - 1;             
@@ -97,11 +121,15 @@ begin
 					 
             end if;
 				start_pressed <= startButton; 
-				button_pressed <= button; 			
+				button_pressed <= button;
 				
         end if;
 		  
     end process;
+
+    score_X <= score_ones; --asign values to outputs
+    score_X0 <= score_tens;
+
 end architecture;
 
 
