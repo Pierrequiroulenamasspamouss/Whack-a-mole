@@ -22,4 +22,4 @@ begin
                     "1111111" when 8,
                     "1111011" when 9,
                     "0000000" when others;
-end architecture;
+end architecture score_display_arch;
