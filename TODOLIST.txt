@@ -6,15 +6,21 @@ Gauthier:
     - optimiser le random_led 
 	- ecran de début jusqua avoir un input
 	- plusieurs led en meme temps (on verra ça à un moment)
+	- augmentation de la vitesse lorsque le score augmente ? 
 
 Pierre: 
     - Design du reste du circuit +prototype 
     - Tester le prototype
     - Nettoyage et fusion des deux codes. 
     - Schematic du circuit
+	-Voir pour un décrement du score / passer a un timer ? 
 
 Ilan 
-    - Gestion des timers
-    - Logique de score
-    - moles qui redescendent apres un certain temps
+    - Gestion des timers -->ok
+    - Logique de score  -->ok
+	- moles qui redescendent apres un certain temps -->ok
+	- Ajouter plusieurs mole
+	- faire fonctionner le start button
+	- incrément du score sur la vitesse du click ?
+	
 	
