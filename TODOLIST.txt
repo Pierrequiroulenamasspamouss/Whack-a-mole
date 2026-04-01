@@ -2,7 +2,7 @@ Faire disparaitre les taupes aléatoirement
 Regarder les boutons input/output
 
 
-Goathier: 
+Gauthier: 
     - optimiser le random_led 
 	- ecran de début jusqua avoir un input
 	- plusieurs led en meme temps (on verra ça à un moment)
@@ -13,7 +13,7 @@ Pierre:
     - Nettoyage et fusion des deux codes. 
     - Schematic du circuit
 
-Ilan(e)? 
+Ilan 
     - Gestion des timers
     - Logique de score
     - moles qui redescendent apres un certain temps
