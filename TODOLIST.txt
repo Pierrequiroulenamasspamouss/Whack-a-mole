@@ -1,5 +1,6 @@
 Faire disparaitre les taupes aléatoirement
 Regarder les boutons input/output
+timer 
 
 
 Gauthier: 
@@ -7,6 +8,8 @@ Gauthier:
 	- ecran de début jusqua avoir un input
 	- plusieurs led en meme temps (on verra ça à un moment)
 	- augmentation de la vitesse lorsque le score augmente ? 
+	- countdown fait avec les Leds
+	- Regarder le rapport 
 
 Pierre: 
     - Design du reste du circuit +prototype 
