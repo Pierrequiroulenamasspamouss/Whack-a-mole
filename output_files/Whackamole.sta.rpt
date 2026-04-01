@@ -1,5 +1,5 @@
 Timing Analyzer report for Whackamole
-Wed Mar 25 22:07:18 2026
+Wed Apr 01 13:13:44 2026
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -16,16 +16,19 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   8. Recovery Summary
   9. Removal Summary
  10. Minimum Pulse Width Summary
- 11. Clock Transfers
- 12. Report TCCS
- 13. Report RSKM
- 14. Unconstrained Paths Summary
- 15. Clock Status Summary
- 16. Unconstrained Input Ports
- 17. Unconstrained Output Ports
- 18. Unconstrained Input Ports
- 19. Unconstrained Output Ports
- 20. Timing Analyzer Messages
+ 11. Setup: 'clk'
+ 12. Hold: 'clk'
+ 13. Setup Transfers
+ 14. Hold Transfers
+ 15. Report TCCS
+ 16. Report RSKM
+ 17. Unconstrained Paths Summary
+ 18. Clock Status Summary
+ 19. Unconstrained Input Ports
+ 20. Unconstrained Output Ports
+ 21. Unconstrained Input Ports
+ 22. Unconstrained Output Ports
+ 23. Timing Analyzer Messages
 
 
 
@@ -78,31 +81,41 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Clocks                                                                                                                                                                              ;
-+------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-------------+
-; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets     ;
-+------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-------------+
-; fastclk    ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { fastclk } ;
-+------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+-------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                          ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; clk        ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
-----------------
-; Fmax Summary ;
-----------------
-No paths to report.
++-------------------------------------------------+
+; Fmax Summary                                    ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 39.81 MHz ; 39.81 MHz       ; clk        ;      ;
++-----------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
------------------
-; Setup Summary ;
------------------
-No paths to report.
++---------------------------------+
+; Setup Summary                   ;
++-------+---------+---------------+
+; Clock ; Slack   ; End Point TNS ;
++-------+---------+---------------+
+; clk   ; -24.122 ; -883.244      ;
++-------+---------+---------------+
 
 
-----------------
-; Hold Summary ;
-----------------
-No paths to report.
++-------------------------------+
+; Hold Summary                  ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 1.728 ; 0.000         ;
++-------+-------+---------------+
 
 
 --------------------
@@ -117,19 +130,249 @@ No paths to report.
 No paths to report.
 
 
-+----------------------------------+
-; Minimum Pulse Width Summary      ;
-+---------+--------+---------------+
-; Clock   ; Slack  ; End Point TNS ;
-+---------+--------+---------------+
-; fastclk ; -2.289 ; -2.289        ;
-+---------+--------+---------------+
++--------------------------------+
+; Minimum Pulse Width Summary    ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; -2.289 ; -2.289        ;
++-------+--------+---------------+
 
 
--------------------
-; Clock Transfers ;
--------------------
-Nothing to report.
++----------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clk'                                                                                                         ;
++---------+-------------------+------------------+--------------+-------------+--------------+------------+------------+
+; Slack   ; From Node         ; To Node          ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++---------+-------------------+------------------+--------------+-------------+--------------+------------+------------+
+; -24.122 ; current_mole[1]   ; mole_duration[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.122 ; current_mole[1]   ; mole_duration[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.122 ; current_mole[1]   ; mole_duration[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.122 ; current_mole[1]   ; mole_duration[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.122 ; current_mole[1]   ; mole_duration[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.122 ; current_mole[1]   ; mole_duration[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.122 ; current_mole[1]   ; mole_duration[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.801     ;
+; -24.118 ; current_mole[1]   ; spawn_delay[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.797     ;
+; -24.118 ; current_mole[1]   ; spawn_delay[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.797     ;
+; -24.118 ; current_mole[1]   ; spawn_delay[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.797     ;
+; -24.118 ; current_mole[1]   ; spawn_delay[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.797     ;
+; -24.118 ; current_mole[1]   ; spawn_delay[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.797     ;
+; -24.118 ; current_mole[1]   ; spawn_delay[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.797     ;
+; -23.688 ; current_mole[1]   ; leds[2]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.367     ;
+; -23.688 ; current_mole[1]   ; leds[3]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.367     ;
+; -23.687 ; current_mole[1]   ; leds[0]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.366     ;
+; -23.686 ; current_mole[1]   ; leds[8]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.365     ;
+; -23.684 ; current_mole[1]   ; leds[5]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.363     ;
+; -23.676 ; current_mole[1]   ; leds[1]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.355     ;
+; -23.673 ; current_mole[1]   ; leds[6]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.352     ;
+; -23.666 ; current_mole[1]   ; leds[7]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 24.345     ;
+; -23.527 ; button_pressed[7] ; mole_duration[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.527 ; button_pressed[7] ; mole_duration[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.527 ; button_pressed[7] ; mole_duration[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.527 ; button_pressed[7] ; mole_duration[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.527 ; button_pressed[7] ; mole_duration[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.527 ; button_pressed[7] ; mole_duration[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.527 ; button_pressed[7] ; mole_duration[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 24.206     ;
+; -23.523 ; button_pressed[7] ; spawn_delay[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.202     ;
+; -23.523 ; button_pressed[7] ; spawn_delay[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.202     ;
+; -23.523 ; button_pressed[7] ; spawn_delay[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.202     ;
+; -23.523 ; button_pressed[7] ; spawn_delay[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.202     ;
+; -23.523 ; button_pressed[7] ; spawn_delay[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.202     ;
+; -23.523 ; button_pressed[7] ; spawn_delay[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 24.202     ;
+; -23.093 ; button_pressed[7] ; leds[2]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.772     ;
+; -23.093 ; button_pressed[7] ; leds[3]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.772     ;
+; -23.092 ; button_pressed[7] ; leds[0]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.771     ;
+; -23.091 ; button_pressed[7] ; leds[8]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.770     ;
+; -23.089 ; button_pressed[7] ; leds[5]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.768     ;
+; -23.081 ; button_pressed[7] ; leds[1]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.760     ;
+; -23.078 ; button_pressed[7] ; leds[6]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.757     ;
+; -23.071 ; button_pressed[7] ; leds[7]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 23.750     ;
+; -22.667 ; current_mole[1]   ; score_timer[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.667 ; current_mole[1]   ; score_timer[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.667 ; current_mole[1]   ; score_timer[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.667 ; current_mole[1]   ; score_timer[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.667 ; current_mole[1]   ; score_timer[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.667 ; current_mole[1]   ; score_timer[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.667 ; current_mole[1]   ; score_timer[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.346     ;
+; -22.662 ; current_mole[0]   ; mole_duration[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.662 ; current_mole[0]   ; mole_duration[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.662 ; current_mole[0]   ; mole_duration[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.662 ; current_mole[0]   ; mole_duration[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.662 ; current_mole[0]   ; mole_duration[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.662 ; current_mole[0]   ; mole_duration[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.662 ; current_mole[0]   ; mole_duration[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.341     ;
+; -22.658 ; current_mole[0]   ; spawn_delay[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.337     ;
+; -22.658 ; current_mole[0]   ; spawn_delay[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.337     ;
+; -22.658 ; current_mole[0]   ; spawn_delay[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.337     ;
+; -22.658 ; current_mole[0]   ; spawn_delay[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.337     ;
+; -22.658 ; current_mole[0]   ; spawn_delay[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.337     ;
+; -22.658 ; current_mole[0]   ; spawn_delay[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.337     ;
+; -22.359 ; mole_active       ; mole_duration[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.359 ; mole_active       ; mole_duration[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.359 ; mole_active       ; mole_duration[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.359 ; mole_active       ; mole_duration[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.359 ; mole_active       ; mole_duration[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.359 ; mole_active       ; mole_duration[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.359 ; mole_active       ; mole_duration[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 23.038     ;
+; -22.355 ; mole_active       ; spawn_delay[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.034     ;
+; -22.355 ; mole_active       ; spawn_delay[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.034     ;
+; -22.355 ; mole_active       ; spawn_delay[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.034     ;
+; -22.355 ; mole_active       ; spawn_delay[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.034     ;
+; -22.355 ; mole_active       ; spawn_delay[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.034     ;
+; -22.355 ; mole_active       ; spawn_delay[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 23.034     ;
+; -22.228 ; current_mole[0]   ; leds[2]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.907     ;
+; -22.228 ; current_mole[0]   ; leds[3]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.907     ;
+; -22.227 ; current_mole[0]   ; leds[0]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.906     ;
+; -22.226 ; current_mole[0]   ; leds[8]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.905     ;
+; -22.224 ; current_mole[0]   ; leds[5]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.903     ;
+; -22.216 ; current_mole[0]   ; leds[1]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.895     ;
+; -22.213 ; current_mole[0]   ; leds[6]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.892     ;
+; -22.206 ; current_mole[0]   ; leds[7]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.885     ;
+; -22.072 ; button_pressed[7] ; score_timer[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -22.072 ; button_pressed[7] ; score_timer[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -22.072 ; button_pressed[7] ; score_timer[2]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -22.072 ; button_pressed[7] ; score_timer[3]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -22.072 ; button_pressed[7] ; score_timer[4]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -22.072 ; button_pressed[7] ; score_timer[5]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -22.072 ; button_pressed[7] ; score_timer[6]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.751     ;
+; -21.887 ; current_mole[1]   ; leds[4]~reg0     ; clk          ; clk         ; 1.000        ; 0.000      ; 22.566     ;
+; -21.698 ; button_pressed[0] ; mole_duration[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.698 ; button_pressed[0] ; mole_duration[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.698 ; button_pressed[0] ; mole_duration[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.698 ; button_pressed[0] ; mole_duration[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.698 ; button_pressed[0] ; mole_duration[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.698 ; button_pressed[0] ; mole_duration[5] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.698 ; button_pressed[0] ; mole_duration[6] ; clk          ; clk         ; 1.000        ; 0.000      ; 22.377     ;
+; -21.694 ; button_pressed[0] ; spawn_delay[0]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.373     ;
+; -21.694 ; button_pressed[0] ; spawn_delay[1]   ; clk          ; clk         ; 1.000        ; 0.000      ; 22.373     ;
++---------+-------------------+------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clk'                                                                                                        ;
++-------+-------------------+------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node         ; To Node          ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-------------------+------------------+--------------+-------------+--------------+------------+------------+
+; 1.728 ; mole_active       ; mole_active      ; clk          ; clk         ; 0.000        ; 0.000      ; 1.767      ;
+; 3.764 ; leds[7]~reg0      ; leds[7]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.803      ;
+; 3.765 ; leds[0]~reg0      ; leds[0]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.804      ;
+; 3.765 ; leds[1]~reg0      ; leds[1]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 3.804      ;
+; 3.783 ; error_timer[5]    ; score_low~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 3.822      ;
+; 4.001 ; button_pressed[8] ; mole_active      ; clk          ; clk         ; 0.000        ; 0.000      ; 4.040      ;
+; 4.284 ; cnt[2]            ; current_mole[2]  ; clk          ; clk         ; 0.000        ; 0.000      ; 4.323      ;
+; 4.428 ; error_timer[0]    ; error_timer[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 4.467      ;
+; 4.456 ; spawn_delay[5]    ; spawn_delay[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 4.495      ;
+; 4.550 ; cnt[1]            ; cnt[1]           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.589      ;
+; 4.575 ; cnt[0]            ; cnt[0]           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.614      ;
+; 4.578 ; cnt[0]            ; cnt[3]           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.617      ;
+; 4.580 ; cnt[0]            ; cnt[2]           ; clk          ; clk         ; 0.000        ; 0.000      ; 4.619      ;
+; 4.859 ; leds[6]~reg0      ; leds[6]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 4.898      ;
+; 5.000 ; cnt[1]            ; cnt[2]           ; clk          ; clk         ; 0.000        ; 0.000      ; 5.039      ;
+; 5.229 ; score_timer[6]    ; score_timer[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.268      ;
+; 5.241 ; spawn_delay[1]    ; spawn_delay[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.280      ;
+; 5.243 ; cnt[3]            ; cnt[3]           ; clk          ; clk         ; 0.000        ; 0.000      ; 5.282      ;
+; 5.244 ; mole_duration[6]  ; mole_duration[6] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.283      ;
+; 5.245 ; cnt[3]            ; cnt[0]           ; clk          ; clk         ; 0.000        ; 0.000      ; 5.284      ;
+; 5.253 ; spawn_delay[0]    ; spawn_delay[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.292      ;
+; 5.254 ; mole_duration[1]  ; mole_duration[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.293      ;
+; 5.256 ; error_timer[1]    ; error_timer[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.295      ;
+; 5.266 ; error_timer[6]    ; error_timer[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.305      ;
+; 5.267 ; mole_duration[0]  ; mole_duration[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.306      ;
+; 5.272 ; error_timer[6]    ; score_low~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.311      ;
+; 5.278 ; score_timer[1]    ; score_timer[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.317      ;
+; 5.281 ; score_timer[0]    ; score_timer[0]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.320      ;
+; 5.343 ; leds[4]~reg0      ; leds[4]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 5.382      ;
+; 5.346 ; leds[5]~reg0      ; leds[5]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 5.385      ;
+; 5.416 ; leds[8]~reg0      ; leds[8]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 5.455      ;
+; 5.441 ; leds[2]~reg0      ; leds[2]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 5.480      ;
+; 5.441 ; leds[3]~reg0      ; leds[3]~reg0     ; clk          ; clk         ; 0.000        ; 0.000      ; 5.480      ;
+; 5.442 ; score_timer[2]    ; score_timer[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.481      ;
+; 5.442 ; spawn_delay[2]    ; spawn_delay[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.481      ;
+; 5.449 ; mole_duration[2]  ; mole_duration[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.488      ;
+; 5.452 ; score_timer[4]    ; score_timer[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.491      ;
+; 5.453 ; score_timer[5]    ; score_timer[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.492      ;
+; 5.464 ; error_timer[4]    ; error_timer[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.503      ;
+; 5.465 ; spawn_delay[4]    ; spawn_delay[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.504      ;
+; 5.466 ; score_timer[3]    ; score_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.505      ;
+; 5.466 ; spawn_delay[3]    ; spawn_delay[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.505      ;
+; 5.472 ; error_timer[2]    ; error_timer[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.511      ;
+; 5.473 ; error_timer[4]    ; score_low~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.512      ;
+; 5.475 ; mole_duration[4]  ; mole_duration[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.514      ;
+; 5.477 ; mole_duration[3]  ; mole_duration[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 5.516      ;
+; 5.786 ; error_timer[2]    ; score_low~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 5.825      ;
+; 5.976 ; spawn_delay[1]    ; spawn_delay[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.015      ;
+; 5.988 ; spawn_delay[0]    ; spawn_delay[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.027      ;
+; 5.989 ; mole_duration[1]  ; mole_duration[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.028      ;
+; 5.991 ; error_timer[1]    ; error_timer[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.030      ;
+; 6.002 ; mole_duration[0]  ; mole_duration[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.041      ;
+; 6.013 ; score_timer[1]    ; score_timer[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.052      ;
+; 6.016 ; score_timer[0]    ; score_timer[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.055      ;
+; 6.120 ; spawn_delay[1]    ; spawn_delay[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.159      ;
+; 6.132 ; spawn_delay[0]    ; spawn_delay[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.171      ;
+; 6.133 ; mole_duration[1]  ; mole_duration[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.172      ;
+; 6.135 ; error_timer[1]    ; error_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.174      ;
+; 6.146 ; mole_duration[0]  ; mole_duration[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.185      ;
+; 6.157 ; score_timer[1]    ; score_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.196      ;
+; 6.160 ; score_timer[0]    ; score_timer[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.199      ;
+; 6.256 ; cnt[0]            ; cnt[1]           ; clk          ; clk         ; 0.000        ; 0.000      ; 6.295      ;
+; 6.259 ; mole_duration[5]  ; mole_duration[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.298      ;
+; 6.272 ; error_timer[3]    ; error_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.311      ;
+; 6.276 ; spawn_delay[0]    ; spawn_delay[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.315      ;
+; 6.290 ; error_timer[5]    ; error_timer[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.329      ;
+; 6.290 ; mole_duration[0]  ; mole_duration[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.329      ;
+; 6.304 ; score_timer[0]    ; score_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.343      ;
+; 6.399 ; current_mole[2]   ; mole_active      ; clk          ; clk         ; 0.000        ; 0.000      ; 6.438      ;
+; 6.423 ; error_timer[3]    ; score_low~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.462      ;
+; 6.429 ; cnt[2]            ; cnt[2]           ; clk          ; clk         ; 0.000        ; 0.000      ; 6.468      ;
+; 6.444 ; spawn_delay[2]    ; spawn_delay[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.483      ;
+; 6.444 ; score_timer[2]    ; score_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.483      ;
+; 6.451 ; mole_duration[2]  ; mole_duration[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.490      ;
+; 6.454 ; score_timer[4]    ; score_timer[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.493      ;
+; 6.455 ; score_timer[5]    ; score_timer[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.494      ;
+; 6.466 ; error_timer[4]    ; error_timer[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.505      ;
+; 6.467 ; spawn_delay[4]    ; spawn_delay[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.506      ;
+; 6.474 ; error_timer[0]    ; error_timer[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.513      ;
+; 6.474 ; error_timer[2]    ; error_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.513      ;
+; 6.477 ; mole_duration[4]  ; mole_duration[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.516      ;
+; 6.598 ; score_timer[4]    ; score_timer[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.637      ;
+; 6.610 ; error_timer[4]    ; error_timer[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.649      ;
+; 6.618 ; error_timer[0]    ; error_timer[2]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.657      ;
+; 6.621 ; mole_duration[4]  ; mole_duration[6] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.660      ;
+; 6.629 ; button_pressed[8] ; spawn_delay[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.668      ;
+; 6.630 ; button_pressed[8] ; spawn_delay[1]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.669      ;
+; 6.650 ; cnt[1]            ; current_mole[1]  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.689      ;
+; 6.683 ; cnt[1]            ; cnt[0]           ; clk          ; clk         ; 0.000        ; 0.000      ; 6.722      ;
+; 6.685 ; cnt[1]            ; cnt[3]           ; clk          ; clk         ; 0.000        ; 0.000      ; 6.724      ;
+; 6.749 ; score_timer[6]    ; score_high~reg0  ; clk          ; clk         ; 0.000        ; 0.000      ; 6.788      ;
+; 6.756 ; spawn_delay[1]    ; spawn_delay[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.795      ;
+; 6.756 ; spawn_delay[1]    ; spawn_delay[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.795      ;
+; 6.762 ; error_timer[0]    ; error_timer[3]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.801      ;
+; 6.769 ; mole_duration[1]  ; mole_duration[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.808      ;
+; 6.769 ; mole_duration[1]  ; mole_duration[5] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.808      ;
+; 6.769 ; mole_duration[1]  ; mole_duration[6] ; clk          ; clk         ; 0.000        ; 0.000      ; 6.808      ;
+; 6.771 ; error_timer[1]    ; error_timer[4]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.810      ;
+; 6.771 ; error_timer[1]    ; error_timer[5]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.810      ;
+; 6.771 ; error_timer[1]    ; error_timer[6]   ; clk          ; clk         ; 0.000        ; 0.000      ; 6.810      ;
++-------+-------------------+------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 1697     ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 1697     ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
 ---------------
@@ -152,19 +395,19 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 9     ; 9    ;
-; Unconstrained Input Port Paths  ; 9     ; 9    ;
-; Unconstrained Output Ports      ; 9     ; 9    ;
-; Unconstrained Output Port Paths ; 9     ; 9    ;
+; Unconstrained Input Port Paths  ; 279   ; 279  ;
+; Unconstrained Output Ports      ; 11    ; 11   ;
+; Unconstrained Output Port Paths ; 11    ; 11   ;
 +---------------------------------+-------+------+
 
 
-+----------------------------------------+
-; Clock Status Summary                   ;
-+---------+---------+------+-------------+
-; Target  ; Clock   ; Type ; Status      ;
-+---------+---------+------+-------------+
-; fastclk ; fastclk ; Base ; Constrained ;
-+---------+---------+------+-------------+
++-------------------------------------+
+; Clock Status Summary                ;
++--------+-------+------+-------------+
+; Target ; Clock ; Type ; Status      ;
++--------+-------+------+-------------+
+; clk    ; clk   ; Base ; Constrained ;
++--------+-------+------+-------------+
 
 
 +---------------------------------------------------------------------------------------------------+
@@ -198,6 +441,8 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; leds[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; leds[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; leds[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; score_high  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; score_low   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-------------+---------------------------------------------------------------------------------------+
 
 
@@ -232,6 +477,8 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; leds[6]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; leds[7]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 ; leds[8]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; score_high  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; score_low   ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
 +-------------+---------------------------------------------------------------------------------------+
 
 
@@ -241,7 +488,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Mar 25 22:07:16 2026
+    Info: Processing started: Wed Apr 01 13:13:42 2026
 Info: Command: quartus_sta Whackamole -c Whackamole
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
@@ -253,25 +500,30 @@ Info (334004): Delay annotation completed successfully
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'Whackamole.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
 Info (332105): Deriving Clocks
-    Info (332105): create_clock -period 1.000 -name fastclk fastclk
+    Info (332105): create_clock -period 1.000 -name clk clk
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
-Info (332140): No fmax paths to report
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -24.122
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):   -24.122            -883.244 clk 
+Info (332146): Worst-case hold slack is 1.728
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     1.728               0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Critical Warning (332148): Timing requirements not met
 Info (332146): Worst-case minimum pulse width slack is -2.289
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):    -2.289              -2.289 fastclk 
+    Info (332119):    -2.289              -2.289 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4682 megabytes
-    Info: Processing ended: Wed Mar 25 22:07:18 2026
+    Info: Peak virtual memory: 4683 megabytes
+    Info: Processing ended: Wed Apr 01 13:13:44 2026
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

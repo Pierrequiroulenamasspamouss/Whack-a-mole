@@ -68,9 +68,9 @@ GND*                         : 3         :        :                   :         
 GND*                         : 4         :        :                   :         : 1         :                
 GND*                         : 5         :        :                   :         : 1         :                
 VCCIO1                       : 6         : power  :                   : 3.3V    : 1         :                
-fastclk                      : 7         : input  : 3.3-V LVTTL       :         : 1         : Y              
+clk                          : 7         : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 8         : power  :                   : 1.8V    :           :                
-slowclk                      : 9         : input  : 3.3-V LVTTL       :         : 1         : Y              
+GND*                         : 9         :        :                   :         : 1         :                
 GND*                         : 10        :        :                   :         : 1         :                
 GND*                         : 11        :        :                   :         : 1         :                
 GND*                         : 12        :        :                   :         : 1         :                
@@ -82,10 +82,10 @@ TDO                          : 17        : output :                   :         
 GND*                         : 18        :        :                   :         : 1         :                
 GND*                         : 19        :        :                   :         : 1         :                
 GND*                         : 20        :        :                   :         : 1         :                
-GND*                         : 21        :        :                   :         : 1         :                
-GND*                         : 22        :        :                   :         : 1         :                
+startButton                  : 21        : input  : 3.3-V LVTTL       :         : 1         : Y              
+score_reset                  : 22        : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 23        : power  :                   : 3.3V    : 1         :                
-addscore                     : 24        : input  : 3.3-V LVTTL       :         : 1         : Y              
+score_high                   : 24        : output : 3.3-V LVTTL       :         : 1         : Y              
 leds[8]                      : 25        : output : 3.3-V LVTTL       :         : 1         : Y              
 leds[7]                      : 26        : output : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 27        :        :                   :         : 1         :                
@@ -95,7 +95,7 @@ GND*                         : 30        :        :                   :         
 GND*                         : 31        :        :                   :         : 1         :                
 GND*                         : 32        :        :                   :         : 1         :                
 GND*                         : 33        :        :                   :         : 1         :                
-GND*                         : 34        :        :                   :         : 2         :                
+score_low                    : 34        : output : 3.3-V LVTTL       :         : 2         : N              
 GND*                         : 35        :        :                   :         : 2         :                
 GND*                         : 36        :        :                   :         : 2         :                
 GND*                         : 37        :        :                   :         : 2         :                

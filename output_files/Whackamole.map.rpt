@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Whackamole
-Wed Mar 25 22:07:10 2026
+Wed Apr 01 13:13:35 2026
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -13,8 +13,10 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Analysis & Synthesis Messages
 
 
 
@@ -40,13 +42,13 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Wed Mar 25 22:07:10 2026       ;
+; Analysis & Synthesis Status ; Successful - Wed Apr 01 13:13:35 2026       ;
 ; Quartus Prime Version       ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name               ; Whackamole                                  ;
 ; Top-level Entity Name       ; Whackamole                                  ;
 ; Family                      ; MAX V                                       ;
-; Total logic elements        ; 9                                           ;
-; Total pins                  ; 21                                          ;
+; Total logic elements        ; 91                                          ;
+; Total pins                  ; 23                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
 +-----------------------------+---------------------------------------------+
@@ -148,38 +150,39 @@ refer to the applicable agreement for further details.
 +----------------------------------+-----------------+-----------------+-----------------------------------------------------------------------------------------+---------+
 
 
-+-------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary           ;
-+---------------------------------------------+---------+
-; Resource                                    ; Usage   ;
-+---------------------------------------------+---------+
-; Total logic elements                        ; 9       ;
-;     -- Combinational with no register       ; 0       ;
-;     -- Register only                        ; 0       ;
-;     -- Combinational with a register        ; 9       ;
-;                                             ;         ;
-; Logic element usage by number of LUT inputs ;         ;
-;     -- 4 input functions                    ; 0       ;
-;     -- 3 input functions                    ; 0       ;
-;     -- 2 input functions                    ; 0       ;
-;     -- 1 input functions                    ; 9       ;
-;     -- 0 input functions                    ; 0       ;
-;                                             ;         ;
-; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 9       ;
-;     -- arithmetic mode                      ; 0       ;
-;     -- qfbk mode                            ; 0       ;
-;     -- register cascade mode                ; 0       ;
-;     -- synchronous clear/load mode          ; 0       ;
-;     -- asynchronous clear/load mode         ; 0       ;
-;                                             ;         ;
-; Total registers                             ; 9       ;
-; I/O pins                                    ; 21      ;
-; Maximum fan-out node                        ; fastclk ;
-; Maximum fan-out                             ; 9       ;
-; Total fan-out                               ; 27      ;
-; Average fan-out                             ; 0.90    ;
-+---------------------------------------------+---------+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Total logic elements                        ; 91    ;
+;     -- Combinational with no register       ; 35    ;
+;     -- Register only                        ; 16    ;
+;     -- Combinational with a register        ; 40    ;
+;                                             ;       ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 31    ;
+;     -- 3 input functions                    ; 12    ;
+;     -- 2 input functions                    ; 27    ;
+;     -- 1 input functions                    ; 4     ;
+;     -- 0 input functions                    ; 1     ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 68    ;
+;     -- arithmetic mode                      ; 23    ;
+;     -- qfbk mode                            ; 0     ;
+;     -- register cascade mode                ; 0     ;
+;     -- synchronous clear/load mode          ; 20    ;
+;     -- asynchronous clear/load mode         ; 0     ;
+;                                             ;       ;
+; Total registers                             ; 56    ;
+; Total logic cells in carry chains           ; 27    ;
+; I/O pins                                    ; 23    ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 56    ;
+; Total fan-out                               ; 365   ;
+; Average fan-out                             ; 3.20  ;
++---------------------------------------------+-------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -187,9 +190,19 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
-; |Whackamole                ; 9 (9)       ; 9            ; 0          ; 21   ; 0            ; 0 (0)        ; 0 (0)             ; 9 (9)            ; 0 (0)           ; 0 (0)      ; |Whackamole         ; Whackamole  ; work         ;
+; |Whackamole                ; 91 (91)     ; 56           ; 0          ; 23   ; 0            ; 35 (35)      ; 16 (16)           ; 40 (40)          ; 27 (27)         ; 0 (0)      ; |Whackamole         ; Whackamole  ; work         ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------+
+; Registers Removed During Synthesis                         ;
++---------------------------------------+--------------------+
+; Register name                         ; Reason for Removal ;
++---------------------------------------+--------------------+
+; start_pressed                         ; Lost fanout        ;
+; Total Number of Removed Registers = 1 ;                    ;
++---------------------------------------+--------------------+
 
 
 +------------------------------------------------------+
@@ -197,14 +210,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 9     ;
+; Total registers                              ; 56    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 20    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 30    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Whackamole|mole_duration[6] ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Whackamole|score_timer[6]   ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; Yes        ; |Whackamole|spawn_delay[5]   ;
+; 9:1                ; 2 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |Whackamole|Mux1             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
 
 
 +-------------------------------+
@@ -213,25 +238,28 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Wed Mar 25 22:06:57 2026
+    Info: Processing started: Wed Apr 01 13:13:21 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Whackamole -c Whackamole
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file main.vhd
-    Info (12022): Found design unit 1: Whackamole-Whackamole_arch File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 17
-    Info (12023): Found entity 1: Whackamole File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 4
+    Info (12022): Found design unit 1: Whackamole-Whackamole_arch File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 22
+    Info (12023): Found entity 1: Whackamole File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 6
 Info (12127): Elaborating entity "Whackamole" for the top level hierarchy
-Warning (21074): Design contains 2 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "slowclk" File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 7
-    Warning (15610): No output dependent on input pin "addscore" File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 10
-Info (21057): Implemented 30 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 12 input pins
-    Info (21059): Implemented 9 output pins
-    Info (21061): Implemented 9 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 4777 megabytes
-    Info: Processing ended: Wed Mar 25 22:07:10 2026
-    Info: Elapsed time: 00:00:13
+Warning (10541): VHDL Signal Declaration warning at main.vhd(16): used implicit default value for signal "score_reset" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 16
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "score_reset" is stuck at GND File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 16
+Info (17049): 1 registers lost all their fanouts during netlist optimizations.
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "startButton" File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 12
+Info (21057): Implemented 114 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 11 input pins
+    Info (21059): Implemented 12 output pins
+    Info (21061): Implemented 91 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 4776 megabytes
+    Info: Processing ended: Wed Apr 01 13:13:35 2026
+    Info: Elapsed time: 00:00:14
     Info: Total CPU time (on all processors): 00:00:32
 
 

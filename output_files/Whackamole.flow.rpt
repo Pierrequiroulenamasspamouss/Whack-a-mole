@@ -1,5 +1,5 @@
 Flow report for Whackamole
-Wed Mar 25 22:07:20 2026
+Wed Apr 01 13:13:46 2026
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -40,15 +40,15 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------+
 ; Flow Summary                                                        ;
 +-----------------------+---------------------------------------------+
-; Flow Status           ; Successful - Wed Mar 25 22:07:20 2026       ;
+; Flow Status           ; Successful - Wed Apr 01 13:13:46 2026       ;
 ; Quartus Prime Version ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name         ; Whackamole                                  ;
 ; Top-level Entity Name ; Whackamole                                  ;
 ; Family                ; MAX V                                       ;
 ; Device                ; 5M160ZE64C5                                 ;
 ; Timing Models         ; Final                                       ;
-; Total logic elements  ; 9 / 160 ( 6 % )                             ;
-; Total pins            ; 21 / 54 ( 39 % )                            ;
+; Total logic elements  ; 79 / 160 ( 49 % )                           ;
+; Total pins            ; 23 / 54 ( 43 % )                            ;
 ; Total virtual pins    ; 0                                           ;
 ; UFM blocks            ; 0 / 1 ( 0 % )                               ;
 +-----------------------+---------------------------------------------+
@@ -59,7 +59,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/25/2026 22:06:58 ;
+; Start date & time ; 04/01/2026 13:13:22 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Whackamole          ;
 +-------------------+---------------------+
@@ -70,7 +70,7 @@ refer to the applicable agreement for further details.
 +--------------------------+--------------------------------+---------------+-------------+----------------+
 ; Assignment Name          ; Value                          ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------+--------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID    ; 51230664996393.177447281725824 ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID    ; 51230664996393.177504200228584 ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT   ; Vhdl                           ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL      ; ModelSim-Altera (VHDL)         ; <None>        ; --          ; --             ;
 ; EDA_TIME_SCALE           ; 1 ps                           ; --            ; --          ; eda_simulation ;
@@ -85,12 +85,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:13     ; 1.0                     ; 4777 MB             ; 00:00:32                           ;
-; Fitter               ; 00:00:02     ; 1.0                     ; 6146 MB             ; 00:00:02                           ;
+; Analysis & Synthesis ; 00:00:14     ; 1.0                     ; 4776 MB             ; 00:00:32                           ;
+; Fitter               ; 00:00:03     ; 1.1                     ; 6163 MB             ; 00:00:04                           ;
 ; Assembler            ; 00:00:01     ; 1.0                     ; 4662 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:02     ; 1.0                     ; 4682 MB             ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4626 MB             ; 00:00:01                           ;
-; Total                ; 00:00:19     ; --                      ; --                  ; 00:00:37                           ;
+; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 4683 MB             ; 00:00:02                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4625 MB             ; 00:00:01                           ;
+; Total                ; 00:00:20     ; --                      ; --                  ; 00:00:40                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

@@ -1,38 +1,106 @@
+
 library ieee ;
 use ieee.std_logic_1164.all ; --Import the standart libraries
 
+
 entity Whackamole is --determine the inputs and outputs
   port
-	(-- Input ports
-	 slowclk	  : in  std_logic ;
-    fastclk   : in  std_logic ;
-    button    : in  std_logic_vector(8 downto 0); --vector of the buttons
-    addscore  : in  std_logic ;
+	(
+	-- Input ports
+    clk       : in  std_logic ;
+    button : in std_logic_vector(8 downto 0); -- vector of buttons
+	 startButton : in std_logic;
 	 
-	 
-	 -- Output ports
-	 leds   : out std_logic_vector(8 downto 0) ) ; --vector of the leds
+    -- Output ports
+	 leds   : out std_logic_vector(8 downto 0); --vector of the leds
+	 score_reset : out std_logic;
+	 score_high : out std_logic;
+	 score_low : out std_logic );
 end entity Whackamole ;
 
+
 architecture Whackamole_arch of Whackamole is
-  signal cnt       : integer range 0 to 8 := 0 ;
-  signal current_value : integer range 0 to 8 := 0 ;
-  signal old_button_press : std_logic := '0' ;
+  signal cnt            : integer range 0 to 8 := 0; --Possible d'implémenter plusieurs mole si on créer un décalage
+																	  --entre différent compteur
+  signal current_mole   : integer range 0 to 8 := 0;
+  signal mole_active    : std_logic := '0';
+  
+  signal score_timer    : integer range 0 to 80 := 0;
+  signal error_timer    : integer range 0 to 80 := 0;
+  signal mole_duration  : integer range 0 to 100 := 0; 
+  signal spawn_delay    : integer range 0 to 50 := 0;  -- les timer sont calculés pour une fréquence de 320Hz
+  
+  signal start_pressed : std_logic := '0';
+  signal button_pressed : std_logic_vector(8 downto 0);
+
+  signal score_ones : integer range 0 to 9 := 0;
 begin
 
-  main : process(fastclk)
-  begin
-    if rising_edge(fastclk) then
+    main : process(clk)
+    begin
+        if rising_edge(clk) then
+		  
+            if cnt = 8 then 
+					cnt <= 0; 
+				else 
+					cnt <= cnt + 1; 
+				end if;
 
-      for i in 0 to 8 loop
-        if button(i) = '0' then -- bouton appuyé (pull-down inversé)
-          leds(i) <= '1';
-        else
-          leds(i) <= '0';
+            if score_timer > 0 then
+                score_high <= '1';
+                score_timer <= score_timer - 1;
+            else
+                score_high <= '0';
+            end if;
+				
+			if error_timer > 0 then
+                score_low <= '1';
+                error_timer <= error_timer - 1;
+            else
+                score_low <= '0';
+            end if;
+
+            if mole_active = '1' then
+                leds(current_mole) <= '1'; -- Allume la taupe
+                
+                if button(current_mole) = '1' and button_pressed(current_mole) = '0' then
+                    score_timer <= 80; --timer pour que le signal soit assez long pour être interpreter
+--                        
+--                    end if;
+                    score_ones <= score_ones + 1;
+                    mole_active <= '0';
+                    spawn_delay <= 32; -- la mole n'apparaît pas directement après la suivante, un peu d'attente
+						  
+                elsif mole_duration > 0 then           --la mole est up pour un certain temps
+                    mole_duration <= mole_duration - 1;	  
+                else
+                    mole_active <= '0';
+                    leds(current_mole) <= '0'; --pas oublier d'eteindre le led quand le temps passe
+                    spawn_delay <= 50;
+                end if;
+                
+
+            else   -- au départ aucune mole sur le terrain
+                leds(current_mole) <= '0';
+                if spawn_delay > 0 then
+                    spawn_delay <= spawn_delay - 1;             
+                elsif (startButton = '1' and start_pressed = '0') or spawn_delay = 0 then -- start une partie ou auto-spawn si la mole n'a pas 
+																														-- était frappé a temps, pas vrmt aléatoire...
+						  start_pressed <= '1';
+                    current_mole <= cnt;
+                    mole_duration <= 100;
+                    mole_active <= '1';
+                end if;
+					 
+            end if;
+				start_pressed <= startButton; 
+				button_pressed <= button;
+				
         end if;
-      end loop;
+		  
+    end process;
 
-    end if;
-  end process main;
 
-end architecture Whackamole_arch;
+end architecture;
+
+
