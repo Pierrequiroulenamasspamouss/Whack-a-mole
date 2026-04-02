@@ -102,7 +102,7 @@ begin
                         end if;
                     end if;
                     
-                    -- Global Tick (on utilise des clocks bien plus lentes)
+                    -- Global Tick Prescaler (0 to 63)
                     if global_tick = 63 then
                         global_tick <= 0;
                     else
@@ -117,7 +117,7 @@ begin
                         end if;
                     end loop;
                     
-                    -- Logique de détection des taupes
+                    -- Logique de détectiond es taupes, grosso modo ce qui était fait avant
                     for i in 0 to 8 loop
                         -- Hit detection indepedante
                         if button(i) = '1' and button_pressed(i) = '0' then
@@ -143,7 +143,7 @@ begin
                         leds(i) <= mole_active(i);
                     end loop;
                     
-                    -- Pénalité d'erreur sur un clic dans le vide on retire 1/64e de temps à la partie
+                    -- Pénalité d'erreur sur un clic dans le vide
                     if wrong_click then
                         error_timer <= 31;
                         if game_duration_timer > 0 then
@@ -172,7 +172,7 @@ begin
                     end if;
                     
             end case;
-				-- lecture des boutons
+
             start_pressed <= startButton; 
             button_pressed <= button;
             
