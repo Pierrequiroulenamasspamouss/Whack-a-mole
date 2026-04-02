@@ -1,9 +1,9 @@
-Analysis & Synthesis Status : Successful - Wed Apr 01 13:13:35 2026
+Analysis & Synthesis Status : Successful - Fri Apr 03 00:46:52 2026
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Whackamole
 Top-level Entity Name : Whackamole
 Family : MAX V
-Total logic elements : 91
-Total pins : 23
+Total logic elements : 164
+Total pins : 24
 Total virtual pins : 0
 UFM blocks : 0 / 1 ( 0 % )

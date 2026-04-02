@@ -71,4 +71,5 @@ set_location_assignment PIN_54 -to button[8]
 set_location_assignment PIN_24 -to score_high
 set_location_assignment PIN_21 -to startButton
 set_location_assignment PIN_22 -to score_reset
-set_location_assignment PIN_7 -to clk
+set_location_assignment PIN_9 -to slowclock
+set_location_assignment PIN_7 -to fastclock

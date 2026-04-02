@@ -68,11 +68,11 @@ GND*                         : 3         :        :                   :         
 GND*                         : 4         :        :                   :         : 1         :                
 GND*                         : 5         :        :                   :         : 1         :                
 VCCIO1                       : 6         : power  :                   : 3.3V    : 1         :                
-clk                          : 7         : input  : 3.3-V LVTTL       :         : 1         : Y              
+fastclock                    : 7         : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 8         : power  :                   : 1.8V    :           :                
-GND*                         : 9         :        :                   :         : 1         :                
+slowclock                    : 9         : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 10        :        :                   :         : 1         :                
-GND*                         : 11        :        :                   :         : 1         :                
+score_low                    : 11        : output : 3.3-V LVTTL       :         : 1         : N              
 GND*                         : 12        :        :                   :         : 1         :                
 GND*                         : 13        :        :                   :         : 1         :                
 TMS                          : 14        : input  :                   :         : 1         :                
@@ -95,7 +95,7 @@ GND*                         : 30        :        :                   :         
 GND*                         : 31        :        :                   :         : 1         :                
 GND*                         : 32        :        :                   :         : 1         :                
 GND*                         : 33        :        :                   :         : 1         :                
-score_low                    : 34        : output : 3.3-V LVTTL       :         : 2         : N              
+GND*                         : 34        :        :                   :         : 2         :                
 GND*                         : 35        :        :                   :         : 2         :                
 GND*                         : 36        :        :                   :         : 2         :                
 GND*                         : 37        :        :                   :         : 2         :                
