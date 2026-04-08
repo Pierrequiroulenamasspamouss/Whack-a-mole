@@ -2,14 +2,16 @@ Faire disparaitre les taupes aléatoirement
 Regarder les boutons input/output
 timer 
 
+chaque 15 points de score on rend plus petit le temps d'apparition des taupes --> augmentation de difficulté. (impossible vers 85-90)
+eventuellement un signal pour indiquer une erreu(lumiere ou son)
+ajouter donc le compteur de score
 
 Gauthier: 
-    - optimiser le random_led 
-	- ecran de début jusqua avoir un input
-	- plusieurs led en meme temps (on verra ça à un moment)
-	- augmentation de la vitesse lorsque le score augmente ? 
-	- countdown fait avec les Leds
 	- Regarder le rapport 
+	- expectation vs reality
+	- pieces used ...
+	- electronic schematic
+	- block diagramm --> quartus schematics
 
 Pierre: 
     - Design du reste du circuit +prototype 
