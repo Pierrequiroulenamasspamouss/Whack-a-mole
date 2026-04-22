@@ -13,12 +13,9 @@ Gauthier:
 	- electronic schematic
 	- block diagramm --> quartus schematics
 
-Pierre: 
-    - Design du reste du circuit +prototype 
-    - Tester le prototype
-    - Nettoyage et fusion des deux codes. 
-    - Schematic du circuit
-	-Voir pour un décrement du score / passer a un timer ? 
+Pierre:     
+    - Nettoyage du code 
+	- Voir pour faire en sorte que le code soit plus clean (ex : on prévoit 4 moles mais max 2 sont possibles à la fois sur le terrain)
 
 Ilan 
     - Gestion des timers -->ok

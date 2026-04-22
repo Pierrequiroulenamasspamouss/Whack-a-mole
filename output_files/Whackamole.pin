@@ -72,7 +72,7 @@ fastclock                    : 7         : input  : 3.3-V LVTTL       :         
 VCCINT                       : 8         : power  :                   : 1.8V    :           :                
 slowclock                    : 9         : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 10        :        :                   :         : 1         :                
-score_low                    : 11        : output : 3.3-V LVTTL       :         : 1         : N              
+GND*                         : 11        :        :                   :         : 1         :                
 GND*                         : 12        :        :                   :         : 1         :                
 GND*                         : 13        :        :                   :         : 1         :                
 TMS                          : 14        : input  :                   :         : 1         :                
@@ -88,7 +88,7 @@ VCCIO1                       : 23        : power  :                   : 3.3V    
 score_high                   : 24        : output : 3.3-V LVTTL       :         : 1         : Y              
 leds[8]                      : 25        : output : 3.3-V LVTTL       :         : 1         : Y              
 leds[7]                      : 26        : output : 3.3-V LVTTL       :         : 1         : Y              
-GND*                         : 27        :        :                   :         : 1         :                
+score_low                    : 27        : output : 3.3-V LVTTL       :         : 1         : N              
 GND*                         : 28        :        :                   :         : 1         :                
 GND*                         : 29        :        :                   :         : 1         :                
 GND*                         : 30        :        :                   :         : 1         :                

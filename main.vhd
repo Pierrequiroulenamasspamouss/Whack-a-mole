@@ -26,8 +26,8 @@ architecture Whackamole_arch of Whackamole is
   -- LFSR de 5 bits pour la génération aléatoire
   signal lfsr           : std_logic_vector(4 downto 0) := "10000"; 
   
-  signal score_timer    : integer range 0 to 31 := 0;
-  signal error_timer    : integer range 0 to 31 := 0;
+  signal score_timer    : integer range 0 to 3 := 0;
+  signal error_timer    : integer range 0 to 3 := 0;
   
   -- utiliser des ticks globaux au lieu de un compteur par taupe
   signal global_tick    : integer range 0 to 63 := 0;
@@ -51,12 +51,12 @@ begin
     begin
         if rising_edge(fastclock) then
 		  
-            -- Générateur LFSR pseudo-aléatoire
+            -- Générateur LFSR pseudo-aléatoire (LFSR  = Linear Feedback Shift Register)
             lfsr <= lfsr(3 downto 0) & (lfsr(4) xor lfsr(2));
             
             slowclock_prev <= slowclock;
             
-            -- nettoyé le score ici
+				-- Score
             if score_timer > 0 then
                 score_high <= '1';
                 score_timer <= score_timer - 1;
@@ -74,12 +74,12 @@ begin
             case state is
                 when IDLE =>
                     score_reset <= '0';
-                    -- reset du score et des variables internes
+                    -- Reset du score et des variables internes
                     mole_active <= (others => '0');
                     mole_duration <= (others => '0');
                     global_tick <= 0;
                     
-                    -- affichage des leds qui clignotent avec pos edge de slowclock 
+                    -- Affichage des leds qui clignotent avec pos edge de slowclock 
                     leds <= (others => slowclock);
                     
                     if startButton = '1' and start_pressed = '0' then
@@ -102,7 +102,7 @@ begin
                         end if;
                     end if;
                     
-                    -- Global Tick Prescaler (0 to 63)
+                    -- Global Tick Prescaler (0 à 63)
                     if global_tick = 63 then
                         global_tick <= 0;
                     else
@@ -122,7 +122,7 @@ begin
                         -- Hit detection indepedante
                         if button(i) = '1' and button_pressed(i) = '0' then
                             if mole_active(i) = '1' then
-                                score_timer <= 31;
+                                score_timer <= 3;
                                 mole_active(i) <= '0';
                             else
                                 wrong_click := true;
@@ -145,7 +145,7 @@ begin
                     
                     -- Pénalité d'erreur sur un clic dans le vide
                     if wrong_click then
-                        error_timer <= 31;
+                        error_timer <= 3;
                         if game_duration_timer > 0 then
                             game_duration_timer <= game_duration_timer - 1;
                         end if;
@@ -154,7 +154,7 @@ begin
                     -- Faire apparaitre les taupes
                     if global_tick = 0 then
                         -- prevention si y'a déjà assez de taupes sur le terrain
-                        if active_count < 4 then
+                        if active_count < 2 then
                         
                             -- Extraction LFSR 0-15 -> index 0-8
                             raw_val := to_integer(unsigned(lfsr(3 downto 0)));

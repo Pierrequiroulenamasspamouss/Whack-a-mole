@@ -1,5 +1,5 @@
 Timing Analyzer report for Whackamole
-Fri Apr 03 00:47:02 2026
+Thu Apr 23 01:08:24 2026
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -70,8 +70,8 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 12          ;
-; Maximum allowed            ; 6           ;
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -95,7 +95,7 @@ refer to the applicable agreement for further details.
 +-----------+-----------------+------------+------+
 ; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
 +-----------+-----------------+------------+------+
-; 28.73 MHz ; 28.73 MHz       ; fastclock  ;      ;
+; 29.91 MHz ; 29.91 MHz       ; fastclock  ;      ;
 +-----------+-----------------+------------+------+
 This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
@@ -105,7 +105,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-----------+---------+---------------+
 ; Clock     ; Slack   ; End Point TNS ;
 +-----------+---------+---------------+
-; fastclock ; -33.802 ; -1219.521     ;
+; fastclock ; -32.432 ; -963.016      ;
 +-----------+---------+---------------+
 
 
@@ -114,7 +114,7 @@ This panel reports FMAX for every clock in the design, regardless of the user-sp
 +-----------+-------+---------------+
 ; Clock     ; Slack ; End Point TNS ;
 +-----------+-------+---------------+
-; fastclock ; 3.235 ; 0.000         ;
+; fastclock ; 3.218 ; 0.000         ;
 +-----------+-------+---------------+
 
 
@@ -144,106 +144,106 @@ No paths to report.
 +---------+----------------+------------------+--------------+-------------+--------------+------------+------------+
 ; Slack   ; From Node      ; To Node          ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +---------+----------------+------------------+--------------+-------------+--------------+------------+------------+
-; -33.802 ; lfsr[2]        ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.481     ;
-; -33.801 ; lfsr[2]        ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.480     ;
-; -33.733 ; lfsr[2]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.412     ;
-; -33.727 ; lfsr[2]        ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.406     ;
-; -33.598 ; lfsr[2]        ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.277     ;
-; -33.517 ; lfsr[0]        ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.196     ;
-; -33.516 ; lfsr[0]        ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.195     ;
-; -33.460 ; lfsr[2]        ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.139     ;
-; -33.448 ; lfsr[0]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.127     ;
-; -33.442 ; lfsr[0]        ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 34.121     ;
-; -33.313 ; lfsr[0]        ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.992     ;
-; -33.212 ; lfsr[3]        ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.891     ;
-; -33.211 ; lfsr[3]        ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.890     ;
-; -33.208 ; lfsr[1]        ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.887     ;
-; -33.207 ; lfsr[1]        ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.886     ;
-; -33.175 ; lfsr[0]        ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.854     ;
-; -33.143 ; lfsr[3]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.822     ;
-; -33.139 ; lfsr[1]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.818     ;
-; -33.137 ; lfsr[3]        ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.816     ;
-; -33.133 ; lfsr[1]        ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.812     ;
-; -33.008 ; lfsr[3]        ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.687     ;
-; -33.004 ; lfsr[1]        ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.683     ;
-; -32.870 ; lfsr[3]        ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.549     ;
-; -32.866 ; lfsr[1]        ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.545     ;
-; -32.796 ; lfsr[2]        ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.475     ;
-; -32.513 ; lfsr[2]        ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.192     ;
-; -32.511 ; lfsr[0]        ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.190     ;
-; -32.484 ; lfsr[2]        ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.163     ;
-; -32.228 ; lfsr[0]        ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.907     ;
-; -32.206 ; lfsr[3]        ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.885     ;
-; -32.202 ; lfsr[1]        ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.881     ;
-; -32.199 ; lfsr[0]        ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.878     ;
-; -32.185 ; lfsr[2]        ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.864     ;
-; -32.179 ; lfsr[2]        ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.858     ;
-; -32.161 ; mole_active[4] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.840     ;
-; -32.160 ; mole_active[4] ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.839     ;
-; -32.154 ; mole_active[6] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.833     ;
-; -32.153 ; mole_active[6] ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.832     ;
-; -32.092 ; mole_active[4] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.771     ;
-; -32.086 ; mole_active[4] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.765     ;
-; -32.085 ; mole_active[6] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.764     ;
-; -32.079 ; mole_active[6] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.758     ;
-; -31.957 ; mole_active[4] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.636     ;
-; -31.950 ; mole_active[6] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.629     ;
-; -31.923 ; lfsr[3]        ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.602     ;
-; -31.919 ; lfsr[1]        ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.598     ;
-; -31.900 ; lfsr[0]        ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.579     ;
-; -31.894 ; lfsr[3]        ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.573     ;
-; -31.894 ; lfsr[0]        ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.573     ;
-; -31.890 ; lfsr[1]        ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.569     ;
-; -31.819 ; mole_active[4] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.498     ;
-; -31.812 ; mole_active[6] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.491     ;
-; -31.595 ; lfsr[3]        ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.274     ;
-; -31.591 ; lfsr[1]        ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.270     ;
-; -31.589 ; lfsr[3]        ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.268     ;
-; -31.585 ; lfsr[1]        ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.264     ;
-; -31.556 ; mole_active[2] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.235     ;
-; -31.555 ; mole_active[2] ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.234     ;
-; -31.487 ; mole_active[2] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.166     ;
-; -31.481 ; mole_active[2] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.160     ;
-; -31.352 ; mole_active[2] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.031     ;
-; -31.247 ; lfsr[2]        ; mole_active[7]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.926     ;
-; -31.214 ; mole_active[2] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.893     ;
-; -31.155 ; mole_active[4] ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.834     ;
-; -31.148 ; mole_active[6] ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.827     ;
-; -30.962 ; lfsr[0]        ; mole_active[7]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.641     ;
-; -30.940 ; lfsr[2]        ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.619     ;
-; -30.938 ; lfsr[2]        ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.617     ;
-; -30.929 ; lfsr[2]        ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.608     ;
-; -30.872 ; mole_active[4] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.551     ;
-; -30.865 ; mole_active[6] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.544     ;
-; -30.843 ; mole_active[4] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.522     ;
-; -30.836 ; mole_active[6] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.515     ;
-; -30.769 ; lfsr[2]        ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.448     ;
-; -30.692 ; mole_active[1] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.371     ;
-; -30.691 ; mole_active[1] ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.370     ;
-; -30.662 ; mole_active[5] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.341     ;
-; -30.661 ; mole_active[5] ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.340     ;
-; -30.657 ; lfsr[3]        ; mole_active[7]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.336     ;
-; -30.655 ; lfsr[0]        ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.334     ;
-; -30.653 ; lfsr[1]        ; mole_active[7]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.332     ;
-; -30.653 ; lfsr[0]        ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.332     ;
-; -30.644 ; lfsr[0]        ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.323     ;
-; -30.623 ; mole_active[1] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.302     ;
-; -30.617 ; mole_active[1] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.296     ;
-; -30.593 ; mole_active[5] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.272     ;
-; -30.587 ; mole_active[5] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.266     ;
-; -30.550 ; mole_active[2] ; mole_duration[7] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.229     ;
-; -30.544 ; mole_active[4] ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.223     ;
-; -30.538 ; mole_active[4] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.217     ;
-; -30.537 ; mole_active[6] ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.216     ;
-; -30.531 ; mole_active[6] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.210     ;
-; -30.508 ; mole_active[0] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.187     ;
-; -30.507 ; mole_active[0] ; mole_active[2]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.186     ;
-; -30.488 ; mole_active[1] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.167     ;
-; -30.484 ; lfsr[0]        ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.163     ;
-; -30.458 ; mole_active[5] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.137     ;
-; -30.439 ; mole_active[0] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.118     ;
-; -30.433 ; mole_active[0] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.112     ;
-; -30.350 ; mole_active[1] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.029     ;
+; -32.432 ; mole_active[2] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 33.111     ;
+; -31.389 ; mole_active[2] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.068     ;
+; -31.389 ; mole_active[2] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.068     ;
+; -31.378 ; mole_active[1] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.057     ;
+; -31.357 ; mole_active[2] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.036     ;
+; -31.355 ; mole_active[4] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 32.034     ;
+; -30.980 ; mole_active[6] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.659     ;
+; -30.739 ; mole_active[0] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.418     ;
+; -30.710 ; mole_active[2] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.389     ;
+; -30.643 ; mole_active[2] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.322     ;
+; -30.635 ; mole_active[2] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.314     ;
+; -30.633 ; mole_active[2] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.312     ;
+; -30.631 ; mole_active[2] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.310     ;
+; -30.578 ; mole_active[5] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.257     ;
+; -30.566 ; mole_active[2] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.245     ;
+; -30.534 ; mole_active[2] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.213     ;
+; -30.505 ; mole_active[3] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.184     ;
+; -30.335 ; mole_active[1] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.014     ;
+; -30.335 ; mole_active[1] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 31.014     ;
+; -30.312 ; mole_active[4] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.991     ;
+; -30.312 ; mole_active[4] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.991     ;
+; -30.303 ; mole_active[1] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.982     ;
+; -30.280 ; mole_active[4] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.959     ;
+; -30.063 ; lfsr[2]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.742     ;
+; -29.937 ; mole_active[6] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.616     ;
+; -29.937 ; mole_active[6] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.616     ;
+; -29.905 ; mole_active[6] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.584     ;
+; -29.840 ; lfsr[3]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.519     ;
+; -29.774 ; mole_active[2] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.453     ;
+; -29.769 ; mole_active[2] ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.448     ;
+; -29.696 ; mole_active[0] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.375     ;
+; -29.696 ; mole_active[0] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.375     ;
+; -29.664 ; mole_active[0] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.343     ;
+; -29.656 ; mole_active[1] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.335     ;
+; -29.633 ; mole_active[4] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.312     ;
+; -29.616 ; mole_active[2] ; mole_active[8]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.295     ;
+; -29.589 ; mole_active[1] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.268     ;
+; -29.581 ; mole_active[1] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.260     ;
+; -29.579 ; mole_active[1] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.258     ;
+; -29.577 ; mole_active[1] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.256     ;
+; -29.570 ; mole_active[7] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.249     ;
+; -29.566 ; mole_active[4] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.245     ;
+; -29.558 ; mole_active[4] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.237     ;
+; -29.556 ; mole_active[4] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.235     ;
+; -29.554 ; mole_active[4] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.233     ;
+; -29.535 ; mole_active[5] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.214     ;
+; -29.535 ; mole_active[5] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.214     ;
+; -29.512 ; mole_active[1] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.191     ;
+; -29.503 ; mole_active[5] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.182     ;
+; -29.495 ; mole_active[2] ; mole_active[7]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.174     ;
+; -29.489 ; mole_active[4] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.168     ;
+; -29.480 ; mole_active[1] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.159     ;
+; -29.462 ; mole_active[3] ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.141     ;
+; -29.462 ; mole_active[3] ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.141     ;
+; -29.457 ; mole_active[4] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.136     ;
+; -29.430 ; mole_active[3] ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 30.109     ;
+; -29.258 ; mole_active[6] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.937     ;
+; -29.215 ; global_tick[5] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.894     ;
+; -29.191 ; mole_active[6] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.870     ;
+; -29.183 ; mole_active[6] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.862     ;
+; -29.181 ; mole_active[6] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.860     ;
+; -29.179 ; mole_active[6] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.858     ;
+; -29.114 ; mole_active[6] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.793     ;
+; -29.103 ; lfsr[1]        ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.782     ;
+; -29.082 ; mole_active[6] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.761     ;
+; -29.020 ; lfsr[2]        ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.699     ;
+; -29.020 ; lfsr[2]        ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.699     ;
+; -29.017 ; mole_active[0] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.696     ;
+; -28.988 ; lfsr[2]        ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.667     ;
+; -28.950 ; mole_active[0] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.629     ;
+; -28.942 ; mole_active[0] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.621     ;
+; -28.940 ; mole_active[0] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.619     ;
+; -28.938 ; mole_active[0] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.617     ;
+; -28.873 ; mole_active[0] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.552     ;
+; -28.856 ; mole_active[5] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.535     ;
+; -28.841 ; mole_active[0] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.520     ;
+; -28.797 ; lfsr[3]        ; mole_active[3]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.476     ;
+; -28.797 ; lfsr[3]        ; mole_duration[3] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.476     ;
+; -28.789 ; mole_active[5] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.468     ;
+; -28.783 ; mole_active[3] ; mole_duration[1] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.462     ;
+; -28.781 ; mole_active[5] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.460     ;
+; -28.779 ; mole_active[5] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.458     ;
+; -28.777 ; mole_active[5] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.456     ;
+; -28.765 ; lfsr[3]        ; mole_active[4]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.444     ;
+; -28.720 ; mole_active[1] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.399     ;
+; -28.717 ; global_tick[2] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.396     ;
+; -28.716 ; mole_active[3] ; mole_duration[6] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.395     ;
+; -28.715 ; mole_active[1] ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.394     ;
+; -28.712 ; mole_active[5] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.391     ;
+; -28.708 ; mole_active[3] ; mole_active[6]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.387     ;
+; -28.706 ; mole_active[3] ; mole_duration[5] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.385     ;
+; -28.704 ; mole_active[3] ; mole_active[5]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.383     ;
+; -28.697 ; mole_active[4] ; mole_duration[4] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.376     ;
+; -28.692 ; mole_active[4] ; mole_duration[0] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.371     ;
+; -28.680 ; mole_active[5] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.359     ;
+; -28.639 ; mole_active[3] ; mole_active[1]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.318     ;
+; -28.607 ; mole_active[3] ; mole_duration[2] ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.286     ;
+; -28.562 ; mole_active[1] ; mole_active[8]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.241     ;
+; -28.554 ; global_tick[1] ; mole_active[0]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.233     ;
+; -28.539 ; mole_active[4] ; mole_active[8]   ; fastclock    ; fastclock   ; 1.000        ; 0.000      ; 29.218     ;
 +---------+----------------+------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -252,106 +252,106 @@ No paths to report.
 +-------+------------------------+------------------------+--------------+-------------+--------------+------------+------------+
 ; Slack ; From Node              ; To Node                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
 +-------+------------------------+------------------------+--------------+-------------+--------------+------------+------------+
-; 3.235 ; lfsr[2]                ; lfsr[3]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.274      ;
-; 3.254 ; lfsr[1]                ; lfsr[2]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.293      ;
-; 3.351 ; lfsr[4]                ; lfsr[0]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.390      ;
-; 3.606 ; state                  ; leds[2]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.645      ;
-; 3.607 ; state                  ; leds[3]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.646      ;
-; 3.607 ; state                  ; leds[6]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.646      ;
-; 3.608 ; state                  ; leds[0]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.647      ;
-; 3.615 ; state                  ; leds[5]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.654      ;
-; 3.617 ; state                  ; leds[4]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.656      ;
-; 3.618 ; state                  ; leds[1]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.657      ;
-; 3.618 ; state                  ; leds[7]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.657      ;
-; 3.750 ; start_pressed          ; score_reset~reg0       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.789      ;
-; 3.769 ; error_timer[4]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.808      ;
-; 3.782 ; score_timer[4]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.821      ;
-; 3.846 ; lfsr[3]                ; lfsr[4]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.885      ;
-; 3.868 ; lfsr[2]                ; lfsr[0]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.907      ;
-; 4.223 ; lfsr[0]                ; lfsr[1]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 4.262      ;
-; 4.253 ; error_timer[1]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 4.292      ;
-; 4.831 ; mole_active[4]         ; mole_duration[4]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 4.870      ;
-; 4.858 ; error_timer[0]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 4.897      ;
-; 5.241 ; error_timer[0]         ; error_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.280      ;
-; 5.252 ; score_timer[0]         ; score_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.291      ;
-; 5.258 ; mole_active[8]         ; mole_duration[8]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.297      ;
-; 5.266 ; mole_duration[3]       ; mole_duration[3]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.305      ;
-; 5.269 ; mole_active[0]         ; mole_duration[0]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.308      ;
-; 5.273 ; mole_duration[3]       ; mole_active[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.312      ;
-; 5.278 ; error_timer[2]         ; error_timer[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.317      ;
-; 5.279 ; score_timer[2]         ; score_timer[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.318      ;
-; 5.281 ; error_timer[1]         ; error_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.320      ;
-; 5.282 ; mole_duration[1]       ; mole_duration[1]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.321      ;
-; 5.283 ; score_timer[1]         ; score_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.322      ;
-; 5.284 ; error_timer[2]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.323      ;
-; 5.286 ; mole_duration[1]       ; mole_active[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.325      ;
-; 5.290 ; mole_active[5]         ; mole_duration[5]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.329      ;
-; 5.297 ; score_timer[2]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.336      ;
-; 5.305 ; global_tick[1]         ; global_tick[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.344      ;
-; 5.308 ; mole_duration[7]       ; mole_duration[7]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.347      ;
-; 5.312 ; global_tick[0]         ; global_tick[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.351      ;
-; 5.314 ; mole_duration[7]       ; mole_active[7]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.353      ;
-; 5.416 ; game_duration_timer[0] ; game_duration_timer[0] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.455      ;
-; 5.431 ; mole_duration[4]       ; mole_duration[4]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.470      ;
-; 5.442 ; error_timer[3]         ; error_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.481      ;
-; 5.443 ; error_timer[4]         ; error_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.482      ;
-; 5.445 ; error_timer[3]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.484      ;
-; 5.454 ; score_timer[4]         ; score_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.493      ;
-; 5.454 ; score_timer[3]         ; score_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.493      ;
-; 5.454 ; mole_duration[5]       ; mole_duration[5]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.493      ;
-; 5.456 ; mole_duration[5]       ; mole_active[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.495      ;
-; 5.459 ; score_timer[3]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.498      ;
-; 5.463 ; global_tick[2]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.502      ;
-; 5.474 ; mole_duration[6]       ; mole_duration[6]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.513      ;
-; 5.475 ; mole_duration[2]       ; mole_duration[2]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.514      ;
-; 5.476 ; mole_duration[0]       ; mole_duration[0]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.515      ;
-; 5.477 ; mole_duration[2]       ; mole_active[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.516      ;
-; 5.480 ; mole_duration[0]       ; mole_active[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.519      ;
-; 5.482 ; mole_duration[6]       ; mole_active[6]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.521      ;
-; 5.482 ; mole_active[3]         ; mole_duration[3]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.521      ;
-; 5.538 ; global_tick[4]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.577      ;
-; 5.540 ; global_tick[5]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.579      ;
-; 5.541 ; global_tick[3]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.580      ;
-; 5.677 ; state                  ; state                  ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.716      ;
-; 5.757 ; game_duration_timer[4] ; game_duration_timer[4] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.796      ;
-; 5.836 ; score_timer[1]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.875      ;
-; 5.839 ; slowclock_prev         ; state                  ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.878      ;
-; 5.976 ; error_timer[0]         ; error_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.015      ;
-; 5.987 ; score_timer[0]         ; score_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.026      ;
-; 6.013 ; error_timer[2]         ; error_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.052      ;
-; 6.014 ; score_timer[2]         ; score_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.053      ;
-; 6.016 ; error_timer[1]         ; error_timer[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.055      ;
-; 6.018 ; score_timer[1]         ; score_timer[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.057      ;
-; 6.040 ; global_tick[1]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.079      ;
-; 6.047 ; global_tick[0]         ; global_tick[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.086      ;
-; 6.120 ; error_timer[0]         ; error_timer[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.159      ;
-; 6.131 ; score_timer[0]         ; score_timer[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.170      ;
-; 6.157 ; error_timer[2]         ; error_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.196      ;
-; 6.158 ; score_timer[2]         ; score_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.197      ;
-; 6.160 ; error_timer[1]         ; error_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.199      ;
-; 6.162 ; score_timer[1]         ; score_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.201      ;
-; 6.184 ; global_tick[1]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.223      ;
-; 6.191 ; global_tick[0]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.230      ;
-; 6.264 ; error_timer[0]         ; error_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.303      ;
-; 6.275 ; score_timer[0]         ; score_timer[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.314      ;
-; 6.304 ; error_timer[1]         ; error_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.343      ;
-; 6.306 ; score_timer[1]         ; score_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.345      ;
-; 6.309 ; mole_active[2]         ; mole_duration[2]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.348      ;
-; 6.335 ; global_tick[0]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.374      ;
-; 6.399 ; mole_active[6]         ; mole_duration[6]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.438      ;
-; 6.408 ; error_timer[0]         ; error_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.447      ;
-; 6.419 ; score_timer[0]         ; score_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.458      ;
-; 6.444 ; error_timer[3]         ; error_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.483      ;
-; 6.453 ; score_timer[0]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.492      ;
-; 6.456 ; score_timer[3]         ; score_timer[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.495      ;
-; 6.465 ; global_tick[2]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.504      ;
-; 6.540 ; global_tick[4]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.579      ;
-; 6.660 ; state                  ; leds[8]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.699      ;
-; 6.820 ; global_tick[1]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.859      ;
-; 6.820 ; global_tick[1]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.859      ;
-; 6.897 ; state                  ; game_duration_timer[3] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.936      ;
-; 6.899 ; state                  ; game_duration_timer[4] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.938      ;
-; 6.971 ; global_tick[0]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.010      ;
+; 3.218 ; lfsr[2]                ; lfsr[3]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.257      ;
+; 3.243 ; lfsr[1]                ; lfsr[2]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.282      ;
+; 3.480 ; error_timer[0]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.519      ;
+; 3.502 ; state                  ; error_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.541      ;
+; 3.764 ; mole_active[3]         ; mole_duration[3]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.803      ;
+; 3.778 ; mole_duration[4]       ; mole_duration[4]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.817      ;
+; 3.789 ; score_timer[0]         ; score_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.828      ;
+; 3.793 ; error_timer[1]         ; error_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.832      ;
+; 3.795 ; error_timer[1]         ; score_low~reg0         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.834      ;
+; 3.799 ; score_timer[0]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.838      ;
+; 3.799 ; score_timer[0]         ; score_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.838      ;
+; 3.853 ; lfsr[3]                ; lfsr[4]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 3.892      ;
+; 4.786 ; lfsr[4]                ; lfsr[0]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 4.825      ;
+; 5.217 ; start_pressed          ; score_reset~reg0       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.256      ;
+; 5.229 ; mole_duration[0]       ; mole_duration[0]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.268      ;
+; 5.230 ; mole_active[4]         ; mole_duration[4]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.269      ;
+; 5.240 ; mole_duration[1]       ; mole_duration[1]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.279      ;
+; 5.241 ; mole_duration[2]       ; mole_duration[2]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.280      ;
+; 5.249 ; mole_active[5]         ; mole_duration[5]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.288      ;
+; 5.325 ; global_tick[0]         ; global_tick[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.364      ;
+; 5.326 ; global_tick[1]         ; global_tick[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.365      ;
+; 5.337 ; error_timer[0]         ; error_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.376      ;
+; 5.345 ; error_timer[0]         ; error_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.384      ;
+; 5.370 ; state                  ; state                  ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.409      ;
+; 5.373 ; state                  ; leds[8]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.412      ;
+; 5.376 ; state                  ; leds[7]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.415      ;
+; 5.431 ; game_duration_timer[0] ; game_duration_timer[0] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.470      ;
+; 5.431 ; mole_active[8]         ; mole_duration[8]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.470      ;
+; 5.433 ; mole_active[7]         ; mole_duration[7]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.472      ;
+; 5.457 ; mole_duration[4]       ; mole_active[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.496      ;
+; 5.464 ; mole_duration[5]       ; mole_duration[5]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.503      ;
+; 5.464 ; mole_duration[6]       ; mole_duration[6]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.503      ;
+; 5.468 ; error_timer[1]         ; error_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.507      ;
+; 5.472 ; mole_duration[6]       ; mole_active[6]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.511      ;
+; 5.473 ; mole_duration[5]       ; mole_active[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.512      ;
+; 5.478 ; global_tick[2]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.517      ;
+; 5.507 ; global_tick[4]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.546      ;
+; 5.508 ; global_tick[5]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.547      ;
+; 5.519 ; global_tick[3]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.558      ;
+; 5.533 ; lfsr[2]                ; lfsr[0]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.572      ;
+; 5.612 ; start_pressed          ; state                  ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 5.651      ;
+; 6.060 ; global_tick[0]         ; global_tick[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.099      ;
+; 6.061 ; global_tick[1]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.100      ;
+; 6.072 ; slowclock_prev         ; state                  ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.111      ;
+; 6.204 ; global_tick[0]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.243      ;
+; 6.205 ; global_tick[1]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.244      ;
+; 6.297 ; mole_active[8]         ; leds[8]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.336      ;
+; 6.348 ; global_tick[0]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.387      ;
+; 6.366 ; mole_duration[0]       ; mole_active[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.405      ;
+; 6.381 ; mole_active[2]         ; mole_duration[2]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.420      ;
+; 6.480 ; global_tick[2]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.519      ;
+; 6.485 ; mole_duration[1]       ; mole_active[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.524      ;
+; 6.509 ; global_tick[4]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.548      ;
+; 6.518 ; mole_duration[2]       ; mole_active[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.557      ;
+; 6.629 ; score_timer[1]         ; score_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.668      ;
+; 6.630 ; score_timer[1]         ; score_high~reg0        ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.669      ;
+; 6.638 ; score_timer[1]         ; score_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.677      ;
+; 6.841 ; global_tick[1]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.880      ;
+; 6.841 ; global_tick[1]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.880      ;
+; 6.889 ; state                  ; score_reset~reg0       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 6.928      ;
+; 6.984 ; global_tick[0]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.023      ;
+; 6.984 ; global_tick[0]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.023      ;
+; 7.030 ; mole_active[7]         ; leds[7]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.069      ;
+; 7.076 ; global_tick[3]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.115      ;
+; 7.076 ; global_tick[3]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.115      ;
+; 7.116 ; global_tick[2]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.155      ;
+; 7.116 ; global_tick[2]         ; global_tick[5]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.155      ;
+; 7.141 ; mole_active[0]         ; mole_duration[0]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.180      ;
+; 7.288 ; start_pressed          ; leds[8]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.327      ;
+; 7.293 ; start_pressed          ; leds[7]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.332      ;
+; 7.488 ; game_duration_timer[4] ; game_duration_timer[4] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.527      ;
+; 7.644 ; game_duration_timer[2] ; game_duration_timer[2] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.683      ;
+; 7.657 ; lfsr[0]                ; lfsr[1]                ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.696      ;
+; 7.894 ; game_duration_timer[1] ; game_duration_timer[1] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.933      ;
+; 7.945 ; global_tick[4]         ; global_tick[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.984      ;
+; 7.945 ; global_tick[4]         ; global_tick[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.984      ;
+; 7.945 ; global_tick[4]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.984      ;
+; 7.945 ; global_tick[4]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 7.984      ;
+; 8.406 ; game_duration_timer[2] ; game_duration_timer[4] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.445      ;
+; 8.513 ; mole_duration[3]       ; mole_active[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.552      ;
+; 8.513 ; mole_duration[3]       ; mole_duration[3]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.552      ;
+; 8.651 ; mole_active[6]         ; mole_duration[6]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.690      ;
+; 8.703 ; mole_duration[7]       ; mole_duration[7]       ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.742      ;
+; 8.710 ; mole_duration[7]       ; mole_active[7]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.749      ;
+; 8.737 ; mole_active[3]         ; leds[3]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.776      ;
+; 8.760 ; button_pressed[2]      ; score_timer[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.799      ;
+; 8.763 ; mole_active[4]         ; leds[4]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.802      ;
+; 8.764 ; button_pressed[2]      ; score_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 8.803      ;
+; 8.974 ; state                  ; game_duration_timer[0] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.013      ;
+; 8.995 ; global_tick[5]         ; global_tick[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.034      ;
+; 8.995 ; global_tick[5]         ; global_tick[1]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.034      ;
+; 8.995 ; global_tick[5]         ; global_tick[2]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.034      ;
+; 8.995 ; global_tick[5]         ; global_tick[3]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.034      ;
+; 8.995 ; global_tick[5]         ; global_tick[4]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.034      ;
+; 9.028 ; game_duration_timer[1] ; game_duration_timer[4] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.067      ;
+; 9.051 ; state                  ; error_timer[0]         ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.090      ;
+; 9.093 ; game_duration_timer[1] ; game_duration_timer[2] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.132      ;
+; 9.139 ; state                  ; game_duration_timer[1] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.178      ;
+; 9.140 ; state                  ; game_duration_timer[2] ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.179      ;
+; 9.159 ; state                  ; leds[1]~reg0           ; fastclock    ; fastclock   ; 0.000        ; 0.000      ; 9.198      ;
 +-------+------------------------+------------------------+--------------+-------------+--------------+------------+------------+
 
 
@@ -360,7 +360,7 @@ No paths to report.
 +------------+-----------+----------+----------+----------+----------+
 ; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+-----------+----------+----------+----------+----------+
-; fastclock  ; fastclock ; 4371     ; 0        ; 0        ; 0        ;
+; fastclock  ; fastclock ; 8210     ; 0        ; 0        ; 0        ;
 +------------+-----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -370,7 +370,7 @@ Entries labeled "false path" only account for clock-to-clock false paths and not
 +------------+-----------+----------+----------+----------+----------+
 ; From Clock ; To Clock  ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
 +------------+-----------+----------+----------+----------+----------+
-; fastclock  ; fastclock ; 4371     ; 0        ; 0        ; 0        ;
+; fastclock  ; fastclock ; 8210     ; 0        ; 0        ; 0        ;
 +------------+-----------+----------+----------+----------+----------+
 Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
@@ -395,7 +395,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
 ; Unconstrained Input Ports       ; 11    ; 11   ;
-; Unconstrained Input Port Paths  ; 186   ; 186  ;
+; Unconstrained Input Port Paths  ; 132   ; 132  ;
 ; Unconstrained Output Ports      ; 12    ; 12   ;
 ; Unconstrained Output Port Paths ; 12    ; 12   ;
 +---------------------------------+-------+------+
@@ -494,11 +494,11 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime Timing Analyzer
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri Apr 03 00:46:59 2026
+    Info: Processing started: Thu Apr 23 01:08:21 2026
 Info: Command: quartus_sta Whackamole -c Whackamole
 Info: qsta_default_script.tcl version: #1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (334003): Started post-fitting delay annotation
@@ -510,14 +510,14 @@ Info (332105): Deriving Clocks
 Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
 Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
 Critical Warning (332148): Timing requirements not met
-Info (332146): Worst-case setup slack is -33.802
+Info (332146): Worst-case setup slack is -32.432
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):   -33.802           -1219.521 fastclock 
-Info (332146): Worst-case hold slack is 3.235
+    Info (332119):   -32.432            -963.016 fastclock 
+Info (332146): Worst-case hold slack is 3.218
     Info (332119):     Slack       End Point TNS Clock 
     Info (332119): ========= =================== =====================
-    Info (332119):     3.235               0.000 fastclock 
+    Info (332119):     3.218               0.000 fastclock 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
 Info (332146): Worst-case minimum pulse width slack is -2.289
@@ -528,9 +528,9 @@ Info (332001): The selected device family is not supported by the report_metasta
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
-    Info: Peak virtual memory: 4673 megabytes
-    Info: Processing ended: Fri Apr 03 00:47:02 2026
+    Info: Peak virtual memory: 4684 megabytes
+    Info: Processing ended: Thu Apr 23 01:08:24 2026
     Info: Elapsed time: 00:00:03
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Total CPU time (on all processors): 00:00:02
 
 

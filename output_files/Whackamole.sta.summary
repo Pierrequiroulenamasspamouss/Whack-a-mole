@@ -3,11 +3,11 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Setup 'fastclock'
-Slack : -33.802
-TNS   : -1219.521
+Slack : -32.432
+TNS   : -963.016
 
 Type  : Hold 'fastclock'
-Slack : 3.235
+Slack : 3.218
 TNS   : 0.000
 
 Type  : Minimum Pulse Width 'fastclock'
