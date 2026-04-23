@@ -81,14 +81,14 @@ TCK                          : 16        : input  :                   :         
 TDO                          : 17        : output :                   :         : 1         :                
 GND*                         : 18        :        :                   :         : 1         :                
 GND*                         : 19        :        :                   :         : 1         :                
-GND*                         : 20        :        :                   :         : 1         :                
+penalty_led                  : 20        : output : 3.3-V LVTTL       :         : 1         : Y              
 startButton                  : 21        : input  : 3.3-V LVTTL       :         : 1         : Y              
 score_reset                  : 22        : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 23        : power  :                   : 3.3V    : 1         :                
 score_high                   : 24        : output : 3.3-V LVTTL       :         : 1         : Y              
 leds[8]                      : 25        : output : 3.3-V LVTTL       :         : 1         : Y              
 leds[7]                      : 26        : output : 3.3-V LVTTL       :         : 1         : Y              
-score_low                    : 27        : output : 3.3-V LVTTL       :         : 1         : N              
+GND*                         : 27        :        :                   :         : 1         :                
 GND*                         : 28        :        :                   :         : 1         :                
 GND*                         : 29        :        :                   :         : 1         :                
 GND*                         : 30        :        :                   :         : 1         :                

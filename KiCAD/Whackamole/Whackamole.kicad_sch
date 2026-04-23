@@ -2532,6 +2532,12 @@
 		(uuid "82f798fa-35b7-445a-b8c0-afa2551dc1ce")
 	)
 	(junction
+		(at 154.94 91.44)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "93f0d9a5-6ed1-42c8-a764-c74461f2eb1a")
+	)
+	(junction
 		(at 31.75 170.18)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2862,6 +2868,16 @@
 			(type default)
 		)
 		(uuid "4a78b2d4-a090-402b-a2b5-71e131463dd1")
+	)
+	(wire
+		(pts
+			(xy 133.35 91.44) (xy 154.94 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4c8ee1d4-1ff8-4e62-a8a3-58bf9b8132f7")
 	)
 	(wire
 		(pts
@@ -4114,6 +4130,82 @@
 			(project "Whackamole"
 				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
 					(reference "D1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 137.16 87.63 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1109f756-6080-43ec-b933-a681777bbbc8")
+		(property "Reference" "D10"
+			(at 137.16 84.836 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LED_penalty"
+			(at 140.462 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 137.16 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 137.16 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Light emitting diode"
+			(at 137.16 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 137.16 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "28e6854e-9de3-42c5-9df8-a909a7745bb5")
+		)
+		(pin "1"
+			(uuid "6ba23ad7-de32-40a0-857d-9632e3de9a96")
+		)
+		(instances
+			(project "Whackamole"
+				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
+					(reference "D10")
 					(unit 1)
 				)
 			)
@@ -6005,6 +6097,72 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 140.97 87.63 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50ec37d9-555a-4a7f-85ab-3b35cb80f2ac")
+		(property "Reference" "#PWR043"
+			(at 147.32 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 141.224 84.074 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 140.97 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 140.97 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 140.97 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "14269261-578a-453e-afbb-cbc008741b69")
+		)
+		(instances
+			(project "Whackamole"
+				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
+					(reference "#PWR043")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 45.72 66.04 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -6464,6 +6622,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 154.94 83.82 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5f7d39e9-3b02-4dbf-a434-ba63f9a0eedb")
+		(property "Reference" "#PWR044"
+			(at 154.94 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 151.384 83.312 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 154.94 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 154.94 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 154.94 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1ca37ea7-1677-4081-b8a2-66e50b23e171")
+		)
+		(instances
+			(project "Whackamole"
+				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
+					(reference "#PWR044")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Switch:SW_Push")
 		(at 40.64 120.65 0)
 		(unit 1)
@@ -6873,6 +7097,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 154.94 87.63 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "756deb45-f980-4cb0-92c1-c0521c70047b")
+		(property "Reference" "R22"
+			(at 152.654 89.408 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "R"
+			(at 154.178 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 153.162 87.63 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 154.94 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 154.94 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a4d4f1f1-a8b1-4845-baaf-1a53f9d10ae4")
+		)
+		(pin "1"
+			(uuid "913e1139-155b-47fd-a8b9-e4a8e164ccc6")
+		)
+		(instances
+			(project "Whackamole"
+				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
+					(reference "R22")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 254 63.5 90)
 		(unit 1)
@@ -6933,6 +7226,73 @@
 			(project ""
 				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
 					(reference "#PWR039")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 160.02 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "78d4aabb-dbc9-4450-a4ec-79d34c790c61")
+		(property "Reference" "StartButton"
+			(at 162.052 84.328 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SW_Push"
+			(at 160.528 86.868 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 160.02 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 160.02 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "add42a0c-748c-4f5c-8318-f41e5c38548b")
+		)
+		(pin "2"
+			(uuid "1bfce70e-0d74-4f6f-9d67-0fc0a243bbbb")
+		)
+		(instances
+			(project ""
+				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
+					(reference "StartButton")
 					(unit 1)
 				)
 			)
@@ -8970,6 +9330,73 @@
 			(project "Whackamole"
 				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
 					(reference "#PWR017")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 165.1 91.44 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b0b6a261-2aa1-48e5-9453-8c646c928aef")
+		(property "Reference" "#PWR048"
+			(at 161.29 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VCC"
+			(at 168.91 91.4399 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 165.1 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 165.1 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 165.1 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "da277d7a-9669-4310-96b9-d4020ceb3e04")
+		)
+		(instances
+			(project "Whackamole"
+				(path "/84b4920e-e463-4fc3-a6fa-c62e0a9b09a9"
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)

@@ -1,28 +1,12 @@
-Faire disparaitre les taupes aléatoirement
-Regarder les boutons input/output
-timer 
 
 chaque 15 points de score on rend plus petit le temps d'apparition des taupes --> augmentation de difficulté. (impossible vers 85-90)
-eventuellement un signal pour indiquer une erreu(lumiere ou son)
-ajouter donc le compteur de score
 
-Gauthier: 
-	- Regarder le rapport 
-	- expectation vs reality
-	- pieces used ...
-	- electronic schematic
-	- block diagramm --> quartus schematics
+Tout le monde : 
+- Mettre à jour les différentes images du rapport. (oui TOUTES)
+- Comprendre bien le nouveau code, qui change un peu de comment on implémentait jusque là
+- Optimiser ? 
+- Souder le circuit IRL
+- Modèles 3D ou en tout cas que ce soit plus nice en main. 
+- Nettoyage du code -> passer commentaires en anglais
+- Nettoyage du rapport -> mise en page.
 
-Pierre:     
-    - Nettoyage du code 
-	- Voir pour faire en sorte que le code soit plus clean (ex : on prévoit 4 moles mais max 2 sont possibles à la fois sur le terrain)
-
-Ilan 
-    - Gestion des timers -->ok
-    - Logique de score  -->ok
-	- moles qui redescendent apres un certain temps -->ok
-	- Ajouter plusieurs mole
-	- faire fonctionner le start button
-	- incrément du score sur la vitesse du click ?
-	
-	

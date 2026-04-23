@@ -69,7 +69,7 @@ The user interface consists of:
     \item \textbf{9 LEDs}: Arranged in a grid, representing the mole locations.
     \item \textbf{9 Buttons}: Each associated with an LED.
     \item \textbf{1 Start Button}: To initiate a new game session.
-    \item \textbf{Score Signals}: `score\_high` and `score\_low` to drive an external display or counter.
+    \item \textbf{Score Signals}: \texttt{score\_high} to drive an external display, and \texttt{penalty\_led} to visually indicate incorrect presses.
 \end{itemize}
 
 \subsection{Inputs and Outputs Signals}
@@ -79,16 +79,17 @@ The following table summarizes the signals of the main \texttt{Whackamole} entit
 \centering
 \begin{tabular}{|l|c|c|l|}
 \hline
-\textbf{Signal} & \textbf{Pin (MAX V)} & \textbf{Direction} & \textbf{Description} \\ \hline
+\textbf{Signal} & \textbf{Pin } & \textbf{Direction} & \textbf{Description} \\ \hline
 \texttt{fastclock} & PIN\_7 & Input & Main system clock \\ \hline
 \texttt{slowclock} & PIN\_9 & Input & Timer reference clock \\ \hline
 \texttt{startButton} & PIN\_21 & Input & Game start initialization \\ \hline
 \texttt{button[8:0]} & PIN\_54 to 63 & Input & 9-button grid inputs \\ \hline
 \texttt{leds[8:0]} & PIN\_25 to 53 & Output & 9-LED grid outputs \\ \hline
 \texttt{score\_high} & PIN\_24 & Output & Success pulse (+1 point) \\ \hline
+\texttt{penalty\_led} & PIN\_23 & Output & Penalty visual feedback \\ \hline
 \texttt{score\_reset} & PIN\_22 & Output & Score reset signal \\ \hline
 \end{tabular}
-\caption{Pin Assignments on the 5M160ZE64C5 CPLD}
+\caption{Pin Assignments on the CPLD devboard}
 \end{table}
 
 To define this interface in VHDL, the main entity \texttt{Whackamole} is declared as follows:
@@ -100,9 +101,9 @@ entity Whackamole is
     button      : in  std_logic_vector(8 downto 0);
     startButton : in  std_logic;
     leds        : out std_logic_vector(8 downto 0);
+    penalty_led : out std_logic;
     score_reset : out std_logic;
-    score_high  : out std_logic;
-    score_low   : out std_logic 
+    score_high  : out std_logic
   );
 end entity Whackamole;
 \end{lstlisting}
@@ -110,29 +111,27 @@ end entity Whackamole;
 \section{Logic Architecture}
 
 \subsection{Code Structure}
-The logic of the \texttt{Whackamole} entity is implemented as a monolithic sequential process triggered by the rising edge of the \texttt{fastclock}. This design choice means all functionalities (timers, random generation, state management) are evaluated sequentially in one central block:
-\begin{lstlisting}[language=VHDL]
-main : process(fastclock)
-begin
-    if rising_edge(fastclock) then
-        -- LFSR, Timers, and FSM evaluated here
-    end if;
-end process;
-\end{lstlisting}
-We found this approach to be the easiest to implement and the most pertinent for this usage, since the number of states of this machine is quite small, and because almost every event is dependant of a clock, or at least a timer. This allows us to level up or level down the difficulty, depending on the player's preference, using the timers of the CPLD. We needed synchronization of events, and this approach was picked instinctively because it felt like the best approach to synchronize everything together. 
+The logic of the \texttt{Whackamole} entity is designed around a modular, concurrent architecture consisting of four independent VHDL processes interconnected by physical trigger signals:
+\begin{itemize}
+    \item \textbf{lfsr\_proc}: Continuously generates pseudo-random sequences.
+    \item \textbf{timer\_proc}: Generates the \texttt{global\_tick} prescaler and handles output pulse timers.
+    \item \textbf{game\_fsm\_proc}: Manages the global state of the game (WAIT\_START, PLAYING) and the overall countdown timer.
+    \item \textbf{moles\_fsm\_proc}: Analyzes button inputs, triggers score events, and controls the lifespans of the 9 independent moles dynamically.
+\end{itemize}
+Processes communicate via trigger signals (e.g., \texttt{trigger\_hit}, \texttt{trigger\_miss}). This is clearly a better approach than our first idea, which was similar to a CPU, waiting for clock cycles to trigger events. 
 
 \subsection{Finite State Machine (FSM)}
-The core control logic of the game is implemented as a finite state machine with two primary states:
+The core control logic of the game is handled by the \texttt{game\_fsm\_proc} process through a finite state machine with two primary states:
 \begin{itemize}
-    \item \textbf{IDLE}: The default state upon power-up and game over. In this state, all LEDs blink synchronously with the \texttt{slowclock} to attract attention and indicate readiness. The system transitions to \texttt{PLAY} when the \texttt{startButton} is pressed.
-    \item \textbf{PLAY}: The active game state lasting 30 ticks. The logic handles mole generation, hit detection, and score pulsing. When the \texttt{game\_duration\_timer} reaches zero, the system returns to \texttt{IDLE}.
+    \item \textbf{WAIT\_START (IDLE)}: The default state upon power-up and game over. In this state, all LEDs blink synchronously with the \texttt{slowclock} to attract attention and indicate readiness. The system transitions to \texttt{PLAYING} when the \texttt{startButton} is pressed.
+    \item \textbf{PLAYING}: The active game state lasting 30 timer ticks. When the \texttt{game\_duration\_timer} reaches zero, the system instantly returns to \texttt{WAIT\_START}.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[->, >=Stealth, node distance=5cm, every state/.style={thick, fill=blue!10}, initial text={Power ON}]
-        \node[state, initial] (IDLE) {IDLE};
-        \node[state, right of=IDLE] (PLAY) {PLAY};
+        \node[state, initial] (IDLE) {WAIT\_START};
+        \node[state, right of=IDLE] (PLAY) {PLAYING};
 
         \path (IDLE) edge [loop above] node [align=center] {startButton = '0'\\} (IDLE)
               (IDLE) edge [bend left] node [above, align=center] {startButton = '1' \\ (score\_reset $\gets$ '1')} (PLAY)
@@ -142,27 +141,38 @@ The core control logic of the game is implemented as a finite state machine with
     \caption{representation of the Finite State Machine}
 \end{figure}
 
-The initialization and transition of these states are managed within the main process. We defined a custom \texttt{state\_type} to handle the logic cleanly:
+The initialization and transition of these states are managed within the main FSM process:
 \begin{lstlisting}[language=VHDL]
-type state_type is (IDLE, PLAY);
-signal state : state_type := IDLE;
--- ... inside the main process
-case state is
-    when IDLE =>
-        -- LEDs blink with slowclock, wait for start
-        leds <= (others => slowclock);
-        if startButton = '1' and start_pressed = '0' then
-            state <= PLAY;
-            game_duration_timer <= 30;
+type game_state_type is (WAIT_START, PLAYING);
+signal game_state : game_state_type := WAIT_START;
+-- ... inside game_fsm_proc
+case game_state is
+    when WAIT_START =>
+        score_reset <= '0';
+        game_duration_timer <= 30; -- Reset du timer principal
+        if startButton = '1' and startButton_prev = '0' then
+            game_state <= PLAYING;
+            score_reset <= '1'; -- Pulse reset vers l'ecran
         end if;
-    when PLAY =>
-        -- Main game logic
-        -- Game ends when timer reaches 0
+
+    when PLAYING =>
+        score_reset <= '0';
+        
+        -- Gestion du Timer de jeu total et penalites
+        if (slowclock = '1' and slowclock_prev = '0') or trigger_miss = '1' then
+            if game_duration_timer > 0 then
+                game_duration_timer <= game_duration_timer - 1;
+            end if;
+        end if;
+
+        -- Transition a la fin du temps
         if game_duration_timer = 0 then
-            state <= IDLE;
+            game_state <= WAIT_START;
         end if;
 end case;
 \end{lstlisting}
+
+\emph{Note:} We have seen that the code we created does not in fact produce a FSM when analyzing the output of the RTL view. Since we only use two states, it seems Quartus optimized the code to not use a FSM inside the hardware logic implementation, and rather use a succession of logic gates, and did not compress parts of it into state machines. We at first failed to understand why our state-machine implementation did not result into a state machine logic implementation, before realizing that the code written and the hardware implementation can be drastically different, but output the same result. 
 
 \subsection{Pseudo-Random Generation (LFSR)}
 To ensure the unpredictability of mole appearances, we searched the Internet to find a suitable random number generation method, and instead of picking up the output of an unpredictable entry (ex : floating input gate or 555 timer running a 4 bit shift register very fast), we found that we could implement an LFSR, Linear-Feedback shift register. Thus we implemented a 5-bit LFSR is implemented. This component generates a sequence of numbers that appears random despite being deterministic. The polynomial used is $x^5 + x^3 + 1$. 
@@ -170,28 +180,34 @@ To ensure the unpredictability of mole appearances, we searched the Internet to 
 -- LFSR update code snippet
 lfsr <= lfsr(3 downto 0) & (lfsr(4) xor lfsr(2));
 \end{lstlisting}
-At each \texttt{fastclock} cycle, the register evolves. When the system decides to spawn a new mole, the current value of the LFSR (truncated to 4 bits) is converted to an index between 0 and 8, used to light up one of the nine output LEDs. The sequence begins with [1 0 0 0 0] to ensure that the pattern does not start repeating itself (ex : [ 0 0 0 0 0 ] would repeat zeros indefinitely, we tried. Since we do not know when the user will start the game, when the user is waiting in the \textbf{IDLE} state, the fastclock has plenty of time to run and "randomize" this LFSR. 
+At each \texttt{fastclock} cycle, the register evolves. When the system decides to spawn a new mole, the current value of the LFSR (truncated to 4 bits) is converted to an index between 0 and 8, used to light up one of the nine output LEDs. The sequence begins with [1 0 0 0 0] to ensure that the pattern does not start repeating itself (ex : [ 0 0 0 0 0 ] would repeat zeros indefinitely, we tried. Since we do not know when the user will start the game, when the user is waiting in the \textbf{WAIT\_START} state, the fastclock has plenty of time to run and "randomize" this LFSR. 
 
 \subsection{Time Management and Synchronization}
 The system uses two clocks passed through the ports:
 \begin{itemize}
     \item \texttt{fastclock}: Used for fast sequential logic (LFSR, edge detection).
-    \item \texttt{slowclock}: Used as a time reference for the game countdown and for flashing LEDs in IDLE mode. Since we don't count time as "seconds" but rather as ticks, we can then adjust the slow clock to adapt the length of the game, thus the difficulty. 
+    \item \texttt{slowclock}: Used as a time reference for the game countdown and for flashing LEDs in WAIT\_START mode. Since we don't count time as "seconds" but rather as ticks, we can then adjust the slow clock to adapt the length of the game, thus the difficulty. 
 \end{itemize}
 An internal \texttt{global\_tick} counter (0 to 63) acts as a pre-divider to pace the appearance of moles and their duration on the screen. This approach is more efficient than individual per-mole counters, since it does use fewer timers, and thus precious logic cells. 
 
+\emph{Prescaler Memory Optimization:} Since the \texttt{fastclock} oscillates very fast, binding mole lifespans directly to it would make them disappear instantly. If each of the 9 moles counted to several hundred cycles individually to stay visible for a second, we would need a massive 10-bit integer ($2^{10}$) for each mole ($9 \times 10 = 90$ Flip-Flops), which would immediately overflow our 160 LE constraint. Instead, the \texttt{global\_tick} acts as a centralized frequency divider (prescaler). By routing the \texttt{fastclock} through a single 6-bit counter (0 to 63), we generate the condition \texttt{global\_tick = 0} to act as a shared, synchronized ``low-frequency virtual clock'' heartbeat. This allows each mole's state machine to use a mere 1-bit logic vector (\texttt{mole\_duration}) to track its lifespan relative to the prescaler, saving substantial hardware real estate.
+
 Here is how the timer updates are implemented in VHDL. We use a \texttt{slowclock\_prev} signal to detect the rising edge of the slow clock synchronously within the \texttt{fastclock} process:
 \begin{lstlisting}[language=VHDL]
--- Total game timer management using slowclock edge detection
-if slowclock = '1' and slowclock_prev = '0' then
+-- Gestion du Timer de jeu total et penalites
+if (slowclock = '1' and slowclock_prev = '0') or trigger_miss = '1' then
     if game_duration_timer > 0 then
         game_duration_timer <= game_duration_timer - 1;
-    else
-        state <= IDLE;
     end if;
 end if;
 
--- Global Tick Prescaler (0 to 63) based on fastclock
+-- Transition a la fin du temps
+if game_duration_timer = 0 then
+    game_state <= WAIT_START;
+end if;
+
+-- Et dans un processus separe (timer_proc)
+-- Global Tick Prescaler (0 a 63)
 if global_tick = 63 then
     global_tick <= 0;
 else
@@ -200,22 +216,16 @@ end if;
 \end{lstlisting}
 
 \subsection{Game Logic and Hit Detection}
-During the \texttt{PLAY} state, the system continuously iterates over the 9 buttons to detect rising edges (button presses). We use a strictly synchronous hit detection mechanism:
+During the \texttt{PLAYING} state, the \texttt{moles\_fsm\_proc} process continuously loops over the 9 buttons to evaluate user inputs against the \texttt{mole\_active} tracking array:
+\begin{itemize}
+    \item \textbf{Non-Deterministic Spawning}: Initially, our spawning logic simply populated two moles immediately when available. Because moles had identical lifespans (exactly 2 global ticks), this inadvertently created an infinite, highly predictable \texttt{2-1-2-1-2} visual loop pattern on the grid. We solved this by using the lowest bit of the LFSR to introduce a 50\% chance of spawning a second mole immediately or delaying it:
 \begin{lstlisting}[language=VHDL]
--- Edge detection for independent hit detection
-if button(i) = '1' and button_pressed(i) = '0' then
-    if mole_active(i) = '1' then
-        score_timer <= 31;      -- Trigger success pulse
-        mole_active(i) <= '0';  -- Deactivate mole
-    else
-        wrong_click := true;    -- Flag for penalty
-    end if;
+if global_tick = 0 and (active_count = 0 or (active_count < 2 and lfsr(0) = '1')) then
+    -- Spawn new mole logic execution
 end if;
 \end{lstlisting}
-\begin{itemize}
-    \item \textbf{Spawning}: A new mole appears if the number of active moles is less than 2.
-    \item \textbf{Hit}: Successfully hitting an active mole activates the \texttt{score\_high} signal for 31 clock cycles. (long enough for the 4026B chip to register an input)   
-    \item \textbf{Miss/Error}: If an error is flagged (\texttt{wrong\_click}), the \texttt{score\_low} signal is activated and a 1-tick penalty is applied to the remaining game time.
+    \item \textbf{Hit}: Successfully hitting an active mole sets \texttt{trigger\_hit <= '1'}, prompting the \texttt{timer\_proc} to activate the \texttt{score\_high} signal for 31 fastclocks (ensuring external 4026B chips correctly register the pulse).
+    \item \textbf{Miss/Error}: Hitting an empty spot flags a \texttt{wrong\_click}, which activates \texttt{trigger\_miss <= '1'}. This instantly decrements the global game timer by 1 tick and lights up the \texttt{penalty\_led} on the breadboard for immediate visual feedback.
 \end{itemize}
 
 \newpage
@@ -231,15 +241,14 @@ The VHDL code was continuously synthesized and programmed onto the MAX V CPLD vi
 This hands-on approach ensured the system's robustness under physical constraints and eliminated the need for abstract software simulation. Since we could afford to build a prototype rightaway, we used this prototype to iterate a lot more quickly than editing our test bench and seeing our program fail miserably in real conditions. We are aware that this approach is not the best one, since building a prototype before designing the logic circuit can become very expensive pretty quickly, and that in many cases it is not possible to do, however the project was small enough to let us build the circuit in parallel of programming the CPLD
 
 \newpage
-\section{Hardware Implementation}
-The design was optimized to minimize logic element usage while maintaining a clear state separation. We chose to use the CPLD in combination with CD4026B chips to display the score, to not overwhelm the CPLD with unnessecary  data (remembering the pattern for each number on an 8 segment display), simplyfy the code and also try to use the CPLD not just as the whole circuit but to be integrated more as a brain in a more complex circuit. 
+\section{Hardware Implementation and optimizations}
+The design was optimized to minimize logic element (LE) usage while maintaining a clear, four-process modular state separation. Keeping the compiled program inside the 160 logic elements boundaries was quite challenging, especially since our first approach was using a big procedural monolithic block without state machines, all controlled by fastclock, like a CPU would do in real life. We realized pretty quickly that this approach was not very clean or maintainable. 
+
+We chose to use this CPLD in combination with CD4026B chips to display the score outside of the design. This prevents overwhelming the CPLD with unnecessary combinational routing data (e.g., seven-segment pattern logic), simplifying the VHDL and integrating the CPLD natively as a discrete logical "brain" in a broader electronic circuit. 
 We used a tool called KiCAD to design the schematic of the circuit, using real component references, and a schematic of the CPLD development board. 
 
 \begin{figure}[H] % [H] pour forcer la position ici
     \centering
-    % On utilise \includegraphics pour le PDF. 
-    % 'page=1' insère la première page. 
-    % 'width' ajuste la taille à la largeur du texte.
     \includegraphics[width=1\linewidth, page=1]{Circuit-schematic.pdf}
     \caption{Electronic schematic of the system (KiCAD)}
     \label{fig:schematic}

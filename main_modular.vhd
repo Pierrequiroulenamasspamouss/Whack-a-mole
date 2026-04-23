@@ -2,7 +2,7 @@ library ieee ;
 use ieee.std_logic_1164.all ;
 use ieee.numeric_std.all;
 
-entity Whackamole is
+entity Whackamole_Modular is
   port
 	(
     fastclock   : in  std_logic ;
@@ -11,22 +11,22 @@ entity Whackamole is
     startButton : in  std_logic;
 	 
 	leds        : out std_logic_vector(8 downto 0);
-    penalty_led : out std_logic;
 	score_reset : out std_logic;
 	score_high  : out std_logic;
 	score_low   : out std_logic 
   );
-end entity Whackamole ;
+end entity Whackamole_Modular ;
 
-architecture Behavior of Whackamole is
+architecture Behavior of Whackamole_Modular is
 
     -- 1) Global Game FSM
     type game_state_type is (WAIT_START, PLAYING, GAME_OVER);
     signal game_state : game_state_type := WAIT_START;
 
-    -- 2) Mole Active Arrays (Replaced FSM array with simple bit vectors to save FFs)
-    signal mole_active   : std_logic_vector(8 downto 0) := (others => '0');
-    signal mole_duration : std_logic_vector(8 downto 0) := (others => '0');
+    -- 2) Mole FSM Array (9 independent concurrent State Machines!)
+    type mole_state_type is (HIDDEN, SHOWING, HIT, MISSED);
+    type mole_state_array is array (0 to 8) of mole_state_type;
+    signal mole_states : mole_state_array := (others => HIDDEN);
 
     -- Timers and Clocks
     signal game_duration_timer : integer range 0 to 30 := 30;
@@ -44,11 +44,9 @@ architecture Behavior of Whackamole is
     signal score_timer : integer range 0 to 31 := 0;
     signal error_timer : integer range 0 to 31 := 0;
 
-    -- Communication triggers between processes
-    signal trigger_hit  : std_logic := '0';
-    signal trigger_miss : std_logic := '0';
-
-
+    -- Mole individual duration timers
+    type int_array is array (0 to 8) of integer range 0 to 63;
+    signal mole_timers : int_array := (others => 0);
 
 begin
 
@@ -71,6 +69,13 @@ begin
         if rising_edge(fastclock) then
             slowclock_prev <= slowclock;
             
+            -- Game Countdown (1 Hz via slowclock edge detection)
+            if slowclock = '1' and slowclock_prev = '0' then
+                if game_duration_timer > 0 and game_state = PLAYING then
+                    game_duration_timer <= game_duration_timer - 1;
+                end if;
+            end if;
+
             -- Global Tick (fast prescaler for mole spawning & timing delays)
             if global_tick = 63 then
                 global_tick <= 0;
@@ -78,31 +83,19 @@ begin
                 global_tick <= global_tick + 1;
             end if;
 
-            -- Score pulsing generation 
-            if trigger_hit = '1' then
-                score_timer <= 31;
-            elsif score_timer > 0 then
-                score_timer <= score_timer - 1;
-            end if;
-            
-            if trigger_hit = '1' or score_timer > 0 then
+            -- Score pulsing generation (Asynchronous length guarantees CPLD recognition)
+            if score_timer > 0 then
                 score_high <= '1';
+                score_timer <= score_timer - 1;
             else
                 score_high <= '0';
             end if;
 
-            if trigger_miss = '1' then
-                error_timer <= 31;
-            elsif error_timer > 0 then
-                error_timer <= error_timer - 1;
-            end if;
-            
-            if trigger_miss = '1' or error_timer > 0 then
+            if error_timer > 0 then
                 score_low <= '1';
-                penalty_led <= '1';
+                error_timer <= error_timer - 1;
             else
                 score_low <= '0';
-                penalty_led <= '0';
             end if;
         end if;
     end process;
@@ -119,7 +112,6 @@ begin
             case game_state is
                 when WAIT_START =>
                     score_reset <= '0';
-                    game_duration_timer <= 30; -- Reset main timer
                     if startButton = '1' and startButton_prev = '0' then
                         game_state <= PLAYING;
                         score_reset <= '1'; -- Send reset pulse to screen
@@ -127,14 +119,6 @@ begin
 
                 when PLAYING =>
                     score_reset <= '0';
-                    
-                    -- Manage Countdown and Penalties
-                    if (slowclock = '1' and slowclock_prev = '0') or trigger_miss = '1' then
-                        if game_duration_timer > 0 then
-                            game_duration_timer <= game_duration_timer - 1;
-                        end if;
-                    end if;
-
                     -- State transition upon timeout
                     if game_duration_timer = 0 then
                         game_state <= GAME_OVER;
@@ -163,21 +147,19 @@ begin
         if rising_edge(fastclock) then
             button_prev <= button;
             wrong_click := false;
-            trigger_hit <= '0';  -- Clear triggers every clock cycle
-            trigger_miss <= '0';
 
             if game_state = PLAYING then
                 
                 -- Count currently showing moles dynamically
                 active_count := 0;
                 for i in 0 to 8 loop
-                    if mole_active(i) = '1' then
+                    if mole_states(i) = SHOWING then
                         active_count := active_count + 1;
                     end if;
                 end loop;
 
                 -- SPAWN LOGIC: Attempt a spawn based on random tick
-                if global_tick = 0 and (active_count = 0 or (active_count < 2 and lfsr(0) = '1')) then
+                if global_tick = 0 and active_count < 2 then
                     raw_val := to_integer(unsigned(lfsr(3 downto 0)));
                     if raw_val > 8 then
                         spawn_idx := raw_val - 9;
@@ -185,48 +167,66 @@ begin
                         spawn_idx := raw_val;
                     end if;
                     
-                    if mole_active(spawn_idx) = '0' then
-                        mole_active(spawn_idx) <= '1';
-                        mole_duration(spawn_idx) <= '1';
+                    if mole_states(spawn_idx) = HIDDEN then
+                        mole_states(spawn_idx) <= SHOWING;
+                        mole_timers(spawn_idx) <= 45; -- Arbitrary life length
                     end if;
                 end if;
 
-                -- RUNNING THE 9 CONCURRENT HIT DETECTORS 
+                -- RUNNING THE 9 CONCURRENT FSMs 
                 for i in 0 to 8 loop
-                    if mole_active(i) = '0' then
-                        leds(i) <= '0';
-                        -- If user clicks a hidden mole, flag penalty!
-                        if button(i) = '1' and button_prev(i) = '0' then
-                            wrong_click := true;
-                        end if;
-                    else
-                        leds(i) <= '1';
-                        -- Edge transition 1: User hits mole
-                        if button(i) = '1' and button_prev(i) = '0' then
-                            trigger_hit <= '1';
-                            mole_active(i) <= '0';
-                        else
-                            -- Edge transition 2: Mole times out naturally after 1 full global tick
-                            if global_tick = 0 then 
-                                if mole_duration(i) = '1' then
-                                    mole_duration(i) <= '0';
-                                else
-                                    mole_active(i) <= '0';
+                    case mole_states(i) is
+                        
+                        when HIDDEN =>
+                            leds(i) <= '0';
+                            -- If user clicks a hidden mole, flag penalty!
+                            if button(i) = '1' and button_prev(i) = '0' then
+                                wrong_click := true;
+                            end if;
+
+                        when SHOWING =>
+                            leds(i) <= '1';
+                            
+                            -- Edge transition 1: User hits mole
+                            if button(i) = '1' and button_prev(i) = '0' then
+                                mole_states(i) <= HIT;
+                            else
+                                -- Edge transition 2: Mole times out naturally
+                                if global_tick = 31 then 
+                                    if mole_timers(i) > 0 then
+                                        mole_timers(i) <= mole_timers(i) - 1;
+                                    else
+                                        mole_states(i) <= MISSED;
+                                    end if;
                                 end if;
                             end if;
-                        end if;
-                    end if;
+
+                        when HIT =>
+                            leds(i) <= '0';
+                            score_timer <= 31; -- Trigger +1 reward
+                            mole_states(i) <= HIDDEN;
+
+                        when MISSED =>
+                            leds(i) <= '0';
+                            wrong_click := true; -- Penalize for missing as an option
+                            mole_states(i) <= HIDDEN;
+
+                    end case;
                 end loop;
 
                 -- APPLY GLOBAL PENALTY LOGIC
                 if wrong_click then
-                    trigger_miss <= '1'; -- Signal to timer & FSM processes
+                    error_timer <= 31;
+                    -- Tick down the main game clock to punish rapid firing
+                    if game_duration_timer > 0 then
+                        game_duration_timer <= game_duration_timer - 1;
+                    end if;
                 end if;
 
             else
                 -- While Game is not actively playing
                 for i in 0 to 8 loop
-                    mole_active(i) <= '0';
+                    mole_states(i) <= HIDDEN;
                     if game_state = WAIT_START then
                         leds(i) <= slowclock; -- Flash effect while waiting
                     else

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Whackamole
-Thu Apr 23 01:08:08 2026
+Thu Apr 23 03:22:23 2026
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -42,12 +42,12 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                              ;
 +-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Successful - Thu Apr 23 01:08:08 2026       ;
+; Analysis & Synthesis Status ; Successful - Thu Apr 23 03:22:23 2026       ;
 ; Quartus Prime Version       ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name               ; Whackamole                                  ;
 ; Top-level Entity Name       ; Whackamole                                  ;
 ; Family                      ; MAX V                                       ;
-; Total logic elements        ; 157                                         ;
+; Total logic elements        ; 162                                         ;
 ; Total pins                  ; 24                                          ;
 ; Total virtual pins          ; 0                                           ;
 ; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
@@ -155,33 +155,33 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Total logic elements                        ; 157       ;
-;     -- Combinational with no register       ; 95        ;
-;     -- Register only                        ; 14        ;
-;     -- Combinational with a register        ; 48        ;
+; Total logic elements                        ; 162       ;
+;     -- Combinational with no register       ; 92        ;
+;     -- Register only                        ; 17        ;
+;     -- Combinational with a register        ; 53        ;
 ;                                             ;           ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 78        ;
-;     -- 3 input functions                    ; 23        ;
-;     -- 2 input functions                    ; 38        ;
-;     -- 1 input functions                    ; 4         ;
+;     -- 4 input functions                    ; 75        ;
+;     -- 3 input functions                    ; 22        ;
+;     -- 2 input functions                    ; 42        ;
+;     -- 1 input functions                    ; 6         ;
 ;     -- 0 input functions                    ; 0         ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 142       ;
-;     -- arithmetic mode                      ; 15        ;
+;     -- normal mode                          ; 139       ;
+;     -- arithmetic mode                      ; 23        ;
 ;     -- qfbk mode                            ; 0         ;
 ;     -- register cascade mode                ; 0         ;
-;     -- synchronous clear/load mode          ; 24        ;
+;     -- synchronous clear/load mode          ; 21        ;
 ;     -- asynchronous clear/load mode         ; 0         ;
 ;                                             ;           ;
-; Total registers                             ; 62        ;
-; Total logic cells in carry chains           ; 19        ;
+; Total registers                             ; 70        ;
+; Total logic cells in carry chains           ; 29        ;
 ; I/O pins                                    ; 24        ;
 ; Maximum fan-out node                        ; fastclock ;
-; Maximum fan-out                             ; 62        ;
-; Total fan-out                               ; 577       ;
-; Average fan-out                             ; 3.19      ;
+; Maximum fan-out                             ; 70        ;
+; Total fan-out                               ; 600       ;
+; Average fan-out                             ; 3.23      ;
 +---------------------------------------------+-----------+
 
 
@@ -190,7 +190,7 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
-; |Whackamole                ; 157 (157)   ; 62           ; 0          ; 24   ; 0            ; 95 (95)      ; 14 (14)           ; 48 (48)          ; 19 (19)         ; 0 (0)      ; |Whackamole         ; Whackamole  ; work         ;
+; |Whackamole                ; 162 (162)   ; 70           ; 0          ; 24   ; 0            ; 92 (92)      ; 17 (17)           ; 53 (53)          ; 29 (29)         ; 0 (0)      ; |Whackamole         ; Whackamole  ; work         ;
 +----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -200,12 +200,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 62    ;
-; Number of registers using Synchronous Clear  ; 24    ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Total registers                              ; 70    ;
+; Number of registers using Synchronous Clear  ; 11    ;
+; Number of registers using Synchronous Load   ; 10    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4     ;
+; Number of registers using Clock Enable       ; 24    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -215,12 +215,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; game_duration_timer[4]                 ; 2       ;
-; game_duration_timer[3]                 ; 2       ;
-; game_duration_timer[2]                 ; 2       ;
+; game_duration_timer[0]                 ; 3       ;
 ; game_duration_timer[1]                 ; 2       ;
+; game_duration_timer[2]                 ; 2       ;
+; game_duration_timer[3]                 ; 2       ;
+; game_duration_timer[4]                 ; 3       ;
 ; lfsr[4]                                ; 1       ;
-; Total number of inverted registers = 5 ;         ;
+; Total number of inverted registers = 6 ;         ;
 +----------------------------------------+---------+
 
 
@@ -229,10 +230,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Whackamole|error_timer[0]         ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Whackamole|global_tick[3]         ;
-; 11:1               ; 2 bits    ; 14 LEs        ; 2 LEs                ; 12 LEs                 ; Yes        ; |Whackamole|score_timer[0]         ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Whackamole|game_duration_timer[3] ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Whackamole|error_timer[3]         ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Whackamole|score_timer[2]         ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Whackamole|game_duration_timer[0] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------+
 
 
@@ -242,22 +242,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Thu Apr 23 01:07:33 2026
+    Info: Processing started: Thu Apr 23 03:22:07 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Whackamole -c Whackamole
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file main.vhd
-    Info (12022): Found design unit 1: Whackamole-Whackamole_arch File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 22
+    Info (12022): Found design unit 1: Whackamole-Behavior File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 20
     Info (12023): Found entity 1: Whackamole File: C:/Users/Pierr/Documents/Ecole/Bac2/Digital_Elec/Quartus_projects/Whack-a-mole/main.vhd Line: 5
 Info (12127): Elaborating entity "Whackamole" for the top level hierarchy
-Info (21057): Implemented 181 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 186 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 12 input pins
     Info (21059): Implemented 12 output pins
-    Info (21061): Implemented 157 logic cells
+    Info (21061): Implemented 162 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4784 megabytes
-    Info: Processing ended: Thu Apr 23 01:08:08 2026
-    Info: Elapsed time: 00:00:35
+    Info: Peak virtual memory: 4773 megabytes
+    Info: Processing ended: Thu Apr 23 03:22:23 2026
+    Info: Elapsed time: 00:00:16
     Info: Total CPU time (on all processors): 00:00:37
 
 

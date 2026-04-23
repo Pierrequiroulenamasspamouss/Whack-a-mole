@@ -1,11 +1,11 @@
-Fitter Status : Successful - Thu Apr 23 01:08:18 2026
+Fitter Status : Successful - Thu Apr 23 03:22:27 2026
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Whackamole
 Top-level Entity Name : Whackamole
 Family : MAX V
 Device : 5M160ZE64C5
 Timing Models : Final
-Total logic elements : 143 / 160 ( 89 % )
+Total logic elements : 146 / 160 ( 91 % )
 Total pins : 24 / 54 ( 44 % )
 Total virtual pins : 0
 UFM blocks : 0 / 1 ( 0 % )
