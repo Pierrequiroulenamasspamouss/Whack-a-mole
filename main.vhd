@@ -40,8 +40,8 @@ architecture Behavior of Whackamole is
     signal startButton_prev : std_logic := '0';
 
     -- Compteurs de pulse du score
-    signal score_timer : integer range 0 to 31 := 0;
-    signal error_timer : integer range 0 to 31 := 0;
+    signal score_timer : integer range 0 to 3 := 0; -- 2 bits
+    signal error_timer : integer range 0 to 31 := 0; -- obligé plus de bits pour que ce soit assez visible
 
     -- Triggers de communication entre les processus
     signal trigger_hit  : std_logic := '0';
@@ -62,7 +62,7 @@ begin
     end process;
 
     -------------------------------------------------------------------------
-    -- Gestionnaire global des horloges & Timers
+    -- Gestionnaire global des clocks
     -------------------------------------------------------------------------
     
     timer_proc: process(fastclock)
@@ -79,7 +79,7 @@ begin
 
             -- Generation du pulse de score 
             if trigger_hit = '1' then
-                score_timer <= 31; -- pourrait être optimisé ici, pas besoin d'aussi long pour la puce. 
+                score_timer <= 3 ; 
             elsif score_timer > 0 then
                 score_timer <= score_timer - 1;
             end if;
@@ -106,7 +106,7 @@ begin
 
 
     -------------------------------------------------------------------------
-    -- Controleur en FSM (Finite State Machine) global du jeu
+    -- Controleur global du jeu
     -------------------------------------------------------------------------
     game_fsm_proc: process(fastclock)
     begin
