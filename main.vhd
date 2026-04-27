@@ -19,31 +19,31 @@ end entity Whackamole ;
 
 architecture Behavior of Whackamole is
 
-    -- 1) FSM Globale du jeu
+    -- 1) Global Game FSM
     type game_state_type is (WAIT_START, PLAYING);
     signal game_state : game_state_type := WAIT_START;
 
-    -- 2) Tableaux des taupes actives 
+    -- 2) Active moles arrays 
     signal mole_active   : std_logic_vector(8 downto 0) := (others => '0');
     signal mole_duration : std_logic_vector(8 downto 0) := (others => '0');
 
-    -- Timers et Horloges
+    -- Timers and Clocks
     signal game_duration_timer : integer range 0 to 30 := 30;
     signal slowclock_prev : std_logic := '0';
     signal global_tick : integer range 0 to 63 := 0;
 
-    -- LFSR pour génération aléatoire
+    -- LFSR for random generation
     signal lfsr : std_logic_vector(4 downto 0) := "10000";
 
-    -- Internes de detection des fronts montants
+    -- Internal rising edge detection
     signal button_prev : std_logic_vector(8 downto 0) := (others => '0');
-    signal startButton_prev : std_logic := '0';
+    signal startButton_prev : std_logic := '1';
 
-    -- Compteurs de pulse du score
+    -- Score pulse counters
     signal score_timer : integer range 0 to 3 := 0; -- 2 bits
-    signal error_timer : integer range 0 to 31 := 0; -- obligé plus de bits pour que ce soit assez visible
+    signal error_timer : integer range 0 to 31 := 0; -- more bits required for sufficient visibility
 
-    -- Triggers de communication entre les processus
+    -- Communication triggers between processes
     signal trigger_hit  : std_logic := '0';
     signal trigger_miss : std_logic := '0';
 
@@ -51,7 +51,7 @@ architecture Behavior of Whackamole is
 
 begin
     -------------------------------------------------------------------------
-    -- Nombres aléatoires
+    -- Random numbers
     -------------------------------------------------------------------------
     
     lfsr_proc: process(fastclock)
@@ -62,7 +62,7 @@ begin
     end process;
 
     -------------------------------------------------------------------------
-    -- Gestionnaire global des clocks
+    -- Global clock manager
     -------------------------------------------------------------------------
     
     timer_proc: process(fastclock)
@@ -70,14 +70,14 @@ begin
         if rising_edge(fastclock) then
             slowclock_prev <= slowclock;
             
-            -- Global Tick Prescaler (0 à 63)
+            -- Global Tick Prescaler (0 to 63)
             if global_tick = 63 then
                 global_tick <= 0;
             else
                 global_tick <= global_tick + 1;
             end if;
 
-            -- Generation du pulse de score 
+            -- Score pulse generation 
             if trigger_hit = '1' then
                 score_timer <= 3 ; 
             elsif score_timer > 0 then
@@ -106,7 +106,7 @@ begin
 
 
     -------------------------------------------------------------------------
-    -- Controleur global du jeu
+    -- Global game controller
     -------------------------------------------------------------------------
     game_fsm_proc: process(fastclock)
     begin
@@ -116,23 +116,23 @@ begin
             case game_state is
                 when WAIT_START =>
                     score_reset <= '0';
-                    game_duration_timer <= 30; -- Reset du timer principal
-                    if startButton = '1' and startButton_prev = '0' then
+                    game_duration_timer <= 30; -- Main timer reset
+                    if startButton = '0' and startButton_prev = '1' then
                         game_state <= PLAYING;
-                        score_reset <= '1'; -- Pulse reset vers l'ecran
+                        score_reset <= '1'; -- Reset pulse to display
                     end if;
 
                 when PLAYING =>
                     score_reset <= '0';
                     
-                    -- Gestion du Timer de jeu total et pénalités
+                    -- Handle total game timer and penalties
                     if (slowclock = '1' and slowclock_prev = '0') or trigger_miss = '1' then
                         if game_duration_timer > 0 then
                             game_duration_timer <= game_duration_timer - 1;
                         end if;
                     end if;
 
-                    -- Transition a la fin du temps
+                    -- Transition at the end of the timer
                     if game_duration_timer = 0 then
                         game_state <= WAIT_START;
                     end if;
@@ -143,7 +143,7 @@ begin
 
 
     -------------------------------------------------------------------------
-    -- Detection des taupes
+    -- Mole detection
     -------------------------------------------------------------------------
     moles_fsm_proc: process(fastclock)
         variable active_count : integer range 0 to 9;
@@ -154,12 +154,12 @@ begin
         if rising_edge(fastclock) then
             button_prev <= button;
             wrong_click := false;
-            trigger_hit <= '0';  -- Clear triggers chaque cycle
+            trigger_hit <= '0';  -- Clear triggers every cycle
             trigger_miss <= '0';
 
             if game_state = PLAYING then
                 
-                -- Compter le nombre de taupes actives dynamiquement
+                -- Dynamically count active moles
                 active_count := 0;
                 for i in 0 to 8 loop
                     if mole_active(i) = '1' then
@@ -167,7 +167,7 @@ begin
                     end if;
                 end loop;
 
-                -- Logique d'apparition: Faire apparaitre les taupes selon tick aleatoire
+                -- Spawning logic: spawn moles based on random tick
                 if global_tick = 0 and (active_count = 0 or (active_count < 2 and lfsr(0) = '1')) then
                     raw_val := to_integer(unsigned(lfsr(3 downto 0)));
                     if raw_val > 8 then
@@ -182,22 +182,22 @@ begin
                     end if;
                 end if;
 
-                -- Lancement des 9 detections de hit parallelement 
+                -- Launch 9 hit detections in parallel 
                 for i in 0 to 8 loop
                     if mole_active(i) = '0' then
                         leds(i) <= '0';
-                        -- Si le joueur clique sur une taupe inactive, penalite!
+                        -- If player clicks an inactive mole, penalty!
                         if button(i) = '1' and button_prev(i) = '0' then
                             wrong_click := true;
                         end if;
                     else
                         leds(i) <= '1';
-                        -- Transition 1: le joueur frappe la taupe
+                        -- Transition 1: player hits the mole
                         if button(i) = '1' and button_prev(i) = '0' then
                             trigger_hit <= '1';
                             mole_active(i) <= '0';
                         else
-                            -- Transition 2: la taupe disparait naturellement apres 1 tick global complet
+                            -- Transition 2: mole disappears naturally after 1 full global tick
                             if global_tick = 0 then 
                                 if mole_duration(i) = '1' then
                                     mole_duration(i) <= '0';
@@ -209,19 +209,19 @@ begin
                     end if;
                 end loop;
 
-                -- Appliquer la penalite globale logique d'erreur
+                -- Apply global error logic penalty
                 if wrong_click then
-                    trigger_miss <= '1'; -- Signal aux processeurs timer & FSM
+                    trigger_miss <= '1'; -- Signal to timer & FSM processes
                 end if;
 
             else
-                -- Pendant que le jeu n'est pas actif
+                -- While the game is inactive
                 for i in 0 to 8 loop
                     mole_active(i) <= '0';
                     if game_state = WAIT_START then
-                        leds(i) <= slowclock; -- Led clignote avec pos edge de slowclock 
+                        leds(i) <= slowclock; -- Led blinks with slowclock positive edge 
                     else
-                        leds(i) <= '0';       -- Turn off safely
+                        leds(i) <= '0';       
                     end if;
                 end loop;
             end if;

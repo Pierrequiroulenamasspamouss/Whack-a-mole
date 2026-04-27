@@ -62,32 +62,32 @@ CHIP  "Whackamole"  ASSIGNED TO AN: 5M160ZE64C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
 -------------------------------------------------------------------------------------------------------------
-GND*                         : 1         :        :                   :         : 1         :                
-GND*                         : 2         :        :                   :         : 1         :                
-GND*                         : 3         :        :                   :         : 1         :                
-GND*                         : 4         :        :                   :         : 1         :                
-GND*                         : 5         :        :                   :         : 1         :                
+leds[6]                      : 1         : output : 3.3-V LVTTL       :         : 1         : Y              
+leds[5]                      : 2         : output : 3.3-V LVTTL       :         : 1         : Y              
+leds[4]                      : 3         : output : 3.3-V LVTTL       :         : 1         : Y              
+leds[3]                      : 4         : output : 3.3-V LVTTL       :         : 1         : Y              
+leds[2]                      : 5         : output : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 6         : power  :                   : 3.3V    : 1         :                
 fastclock                    : 7         : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCINT                       : 8         : power  :                   : 1.8V    :           :                
 slowclock                    : 9         : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 10        :        :                   :         : 1         :                
-GND*                         : 11        :        :                   :         : 1         :                
-GND*                         : 12        :        :                   :         : 1         :                
-GND*                         : 13        :        :                   :         : 1         :                
+leds[1]                      : 11        : output : 3.3-V LVTTL       :         : 1         : Y              
+leds[0]                      : 12        : output : 3.3-V LVTTL       :         : 1         : Y              
+button[8]                    : 13        : input  : 3.3-V LVTTL       :         : 1         : Y              
 TMS                          : 14        : input  :                   :         : 1         :                
 TDI                          : 15        : input  :                   :         : 1         :                
 TCK                          : 16        : input  :                   :         : 1         :                
 TDO                          : 17        : output :                   :         : 1         :                
-GND*                         : 18        :        :                   :         : 1         :                
-GND*                         : 19        :        :                   :         : 1         :                
-penalty_led                  : 20        : output : 3.3-V LVTTL       :         : 1         : Y              
-startButton                  : 21        : input  : 3.3-V LVTTL       :         : 1         : Y              
-score_reset                  : 22        : output : 3.3-V LVTTL       :         : 1         : Y              
+button[7]                    : 18        : input  : 3.3-V LVTTL       :         : 1         : Y              
+button[6]                    : 19        : input  : 3.3-V LVTTL       :         : 1         : Y              
+button[5]                    : 20        : input  : 3.3-V LVTTL       :         : 1         : Y              
+button[4]                    : 21        : input  : 3.3-V LVTTL       :         : 1         : Y              
+button[3]                    : 22        : input  : 3.3-V LVTTL       :         : 1         : Y              
 VCCIO1                       : 23        : power  :                   : 3.3V    : 1         :                
-score_high                   : 24        : output : 3.3-V LVTTL       :         : 1         : Y              
-leds[8]                      : 25        : output : 3.3-V LVTTL       :         : 1         : Y              
-leds[7]                      : 26        : output : 3.3-V LVTTL       :         : 1         : Y              
+button[2]                    : 24        : input  : 3.3-V LVTTL       :         : 1         : Y              
+button[1]                    : 25        : input  : 3.3-V LVTTL       :         : 1         : Y              
+button[0]                    : 26        : input  : 3.3-V LVTTL       :         : 1         : Y              
 GND*                         : 27        :        :                   :         : 1         :                
 GND*                         : 28        :        :                   :         : 1         :                
 GND*                         : 29        :        :                   :         : 1         :                
@@ -101,28 +101,28 @@ GND*                         : 36        :        :                   :         
 GND*                         : 37        :        :                   :         : 2         :                
 GND*                         : 38        :        :                   :         : 2         :                
 VCCIO2                       : 39        : power  :                   : 3.3V    : 2         :                
-leds[6]                      : 40        : output : 3.3-V LVTTL       :         : 2         : Y              
+GND*                         : 40        :        :                   :         : 2         :                
 VCCINT                       : 41        : power  :                   : 1.8V    :           :                
-leds[5]                      : 42        : output : 3.3-V LVTTL       :         : 2         : Y              
+GND*                         : 42        :        :                   :         : 2         :                
 GND*                         : 43        :        :                   :         : 2         :                
-leds[4]                      : 44        : output : 3.3-V LVTTL       :         : 2         : Y              
-leds[3]                      : 45        : output : 3.3-V LVTTL       :         : 2         : Y              
-leds[2]                      : 46        : output : 3.3-V LVTTL       :         : 2         : Y              
-leds[1]                      : 47        : output : 3.3-V LVTTL       :         : 2         : Y              
+GND*                         : 44        :        :                   :         : 2         :                
+GND*                         : 45        :        :                   :         : 2         :                
+GND*                         : 46        :        :                   :         : 2         :                
+GND*                         : 47        :        :                   :         : 2         :                
 GND*                         : 48        :        :                   :         : 2         :                
 GND*                         : 49        :        :                   :         : 2         :                
 GND*                         : 50        :        :                   :         : 2         :                
 GND*                         : 51        :        :                   :         : 2         :                
 GND*                         : 52        :        :                   :         : 2         :                
-leds[0]                      : 53        : output : 3.3-V LVTTL       :         : 2         : Y              
-button[8]                    : 54        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[7]                    : 55        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[6]                    : 56        : input  : 3.3-V LVTTL       :         : 2         : Y              
+GND*                         : 53        :        :                   :         : 2         :                
+GND*                         : 54        :        :                   :         : 2         :                
+GND*                         : 55        :        :                   :         : 2         :                
+GND*                         : 56        :        :                   :         : 2         :                
 VCCIO2                       : 57        : power  :                   : 3.3V    : 2         :                
-button[5]                    : 58        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[4]                    : 59        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[3]                    : 60        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[2]                    : 61        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[1]                    : 62        : input  : 3.3-V LVTTL       :         : 2         : Y              
-button[0]                    : 63        : input  : 3.3-V LVTTL       :         : 2         : Y              
+penalty_led                  : 58        : output : 3.3-V LVTTL       :         : 2         : Y              
+startButton                  : 59        : input  : 3.3-V LVTTL       :         : 2         : Y              
+score_reset                  : 60        : output : 3.3-V LVTTL       :         : 2         : Y              
+score_high                   : 61        : output : 3.3-V LVTTL       :         : 2         : Y              
+leds[8]                      : 62        : output : 3.3-V LVTTL       :         : 2         : Y              
+leds[7]                      : 63        : output : 3.3-V LVTTL       :         : 2         : Y              
 GND*                         : 64        :        :                   :         : 1         :                
